@@ -1,24 +1,44 @@
-*.log
-.DS_Store
+# Laravel vendor & dependencies
+/vendor/
+/node_modules/
+
+# Laravel environment files
 .env
 .env.backup
+.env.local
 .env.production
-.phpactor.json
-.phpunit.result.cache
-/.fleet
-/.idea
-/.nova
-/.phpunit.cache
-/.vscode
-/.zed
-/auth.json
-/node_modules
-/public/build
+.env.testing
+
+# Laravel logs & cache
+/storage/*.key
+/storage/logs/
+/storage/framework/cache/
+/storage/framework/sessions/
+/storage/framework/views/
+
+# Laravel compiled files
+/bootstrap/cache/*.php
+
+# IDE & editor configs
+.idea/
+.vscode/
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# NPM/Yarn build
 /public/hot
 /public/storage
-/storage/*.key
-/storage/pail
-/vendor
-Homestead.json
-Homestead.yaml
-Thumbs.db
+/public/mix-manifest.json
+
+# Laravel testing
+coverage/
+phpunit.xml.cache
+
+# Composer lock (optional, biasanya tetap di-track)
+# composer.lock
