@@ -1,0 +1,49 @@
+.body{color:var(--default-color);background-color:var(--background-color);font-family:var(--default-font)}
+.navbar{transition:all .3s ease;position:fixed;top:0;left:0;width:100%;z-index:1000;background-color:#fff;box-shadow:0 5px 5px rgba(0,0,0,.1)}
+.navbar .nav-link{color:#004080!important;margin-left:15px;font-size:16px}
+.navbar .nav-link.active,.navbar .nav-link:hover{color:#f60!important}
+.navbar-brand img{height:50px}
+.navbar-nav .nav-link{position:relative;color:#036;font-weight:500;margin-left:20px;transition:color .3s ease}
+.navbar-nav .nav-link::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background-color:#f60;transition:width .3s ease}
+.navbar-nav .nav-link:hover::after{width:100%}
+.navbar-nav .nav-link:hover{color:#f60}
+.navbar-nav .nav-link.active::after{width:100%}
+#heroCarousel{margin-top:100px}
+#portfolio img{transition:transform .3s ease;cursor:pointer}
+#portfolio img:hover{transform:scale(1.05)}
+.portfolio-caption{color:#fff;text-align:center;padding:10px 20px;margin-top:12px;border-radius:8px;display:inline-block}
+.btn-custom{background-color:#f46f20;color:#fff;border-radius:8px;padding:8px 18px;text-decoration:none;font-weight:600;display:inline-block;transition:.3s}
+.btn-custom:hover{background-color:#d95d15}
+.bg-red{background-color:#e74c3c}
+.bg-green{background-color:#27ae60}
+.bg-blue{background-color:#233f80}
+.bg-orange{background-color:#f39c12}
+#about .card{background-color:#fff;border:1px solid #e0e0e0}
+#about p{font-size:15px;line-height:1.7}
+@media (max-width:768px){
+#about h3{font-size:20px;text-align:center}
+#about p{font-size:14px;text-align:justify}
+}
+/*.bg-light{background-color:#233f80 !important}*/
+.card-text-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#333;font-size:1.2rem;font-weight:600}
+.gallery-box{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.1);transition:transform .3s ease,box-shadow .3s ease}
+.gallery-box:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.gallery-box img{width:100%;height:220px;object-fit:cover;display:block}
+.gallery-caption{padding:12px;text-align:center;background:#f9f9f9}
+.gallery-caption p{margin:0;font-size:14px;color:#555}
+.news-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.1);transition:transform .3s ease,box-shadow .3s ease;height:100%;display:flex;flex-direction:column}
+.news-card:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.news-img{width:100%;height:180px;object-fit:cover}
+.news-body{padding:15px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+.news-title{font-size:18px;font-weight:600;margin-bottom:10px}
+.news-text{font-size:14px;color:#555;margin-bottom:15px}
+.client-card{padding:15px;background:#fff;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.1);transition:transform .3s}
+.client-card:hover{transform:translateY(-5px)}
+.client-img{max-height:80px;object-fit:contain}
+.footer-heading{font-weight:700;margin-bottom:15px}
+footer a:hover{text-decoration:underline}
+.map-container iframe{border-radius:10px;width:100%;height:200px}
+.about-hero{background:url(/images/hero2.jpeg) center/cover no-repeat;height:300px}
+.about-hero h1,.about-hero p{text-shadow:2px 2px 5px rgba(0,0,0,.6)}
+.nav-link.active{color:#f46f20!important;position:relative}
+.nav-link.active::after{content:'';display:block;width:50%;height:2px;background-color:#f46f20;margin:5px auto 0 auto}

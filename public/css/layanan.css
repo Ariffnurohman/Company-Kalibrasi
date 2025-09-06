@@ -1,0 +1,26 @@
+/* Hero Layanan */
+.service-hero {
+    background: linear-gradient(rgba(35, 63, 128, 0.8), rgba(35, 63, 128, 0.8)),
+                url('../images/hero-services.jpg') center/cover no-repeat;
+    min-height: 50vh;
+  }
+  
+  /* Card Layanan */
+  .service-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+  
+  .service-card .btn-primary {
+    background-color: #F46F20;
+    border: none;
+  }
+  
+  .service-card .btn-primary:hover {
+    background-color: #d95c15;
+  }
+  
