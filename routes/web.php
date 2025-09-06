@@ -15,10 +15,14 @@ Route::get('/layanan', function () {
     return view('layanan');
 })->name('layanan');
 
+Route::get('/clients', function () {
+    return view('clients');
+})->name('clients');
+
 Route::view('/home', 'home');
 Route::view('/about', 'about');
 Route::view('/layanan', 'layanan');
-Route::view('/klien', 'klien');
+Route::view('/clients', 'clients');
 Route::view('/berita', 'berita');
 Route::view('/gallery', 'gallery');
 Route::view('/kontak', 'kontak');

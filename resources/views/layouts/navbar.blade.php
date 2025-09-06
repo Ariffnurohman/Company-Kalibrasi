@@ -12,7 +12,7 @@
                 <li class="nav-item"><a class="nav-link" href="home">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="about">Tentang Kami</a></li>
                 <li class="nav-item"><a class="nav-link" href="layanan">Layanan</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Klien Kami</a></li>
+                <li class="nav-item"><a class="nav-link" href="clients">Klien Kami</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Berita</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Kontak Kami</a></li>

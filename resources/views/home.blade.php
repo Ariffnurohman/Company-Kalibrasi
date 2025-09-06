@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 <!-- Hero Section -->
-<div id="heroCarousel" class="carousel slide mt-6" data-bs-ride="carousel">
+<div id="heroCarousel" class="carousel slide mt-6" data-aos="zoom-in" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="{{ asset('images/hero1.png') }}" class="d-block w-100 img-fluid" alt="Hero 1">
@@ -23,7 +23,7 @@
 </div>
 
 <!-- Portfolio Section -->
-<section id="portfolio" class="py-5 ">
+<section id="portfolio" class="py-5 " data-aos="fade-up">
   <div class="container">
     <div class="row g-5">
 
@@ -213,6 +213,8 @@
           <li><a href="#" class="text-light text-decoration-none">Workshop Instrumental Kimia</a></li>
           <li><a href="#" class="text-light text-decoration-none">Sertifikasi Peserta</a></li>
         </ul>
+        <img src="{{ asset('images/kan logo.png') }}" class="img-fluid rounded shadow mt-1" alt="sertifikasi kan">
+
       </div>
 
       <!-- Kontak Kami -->
