@@ -19,6 +19,15 @@ Route::get('/clients', function () {
     return view('clients');
 })->name('clients');
 
+Route::get('/berita', function () {
+    return view('berita');
+})->name('berita');
+
+Route::get('/gallery', function () {
+    return view('gallery');
+})->name('gallery');
+
+
 Route::view('/home', 'home');
 Route::view('/about', 'about');
 Route::view('/layanan', 'layanan');
