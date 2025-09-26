@@ -39,7 +39,7 @@
             Kelistrikan, Dimensi, Tekanan. Contoh alat ukur: Tangki/Storage Tank, Belt Conveyor,
             Flow Meter, Rotameter, Jembatan Timbang, Hammer Crusher, Rotary Sample Divider (RSD), dll.
           </p>
-          <a href="{{ url('/pelatihan') }}" class="btn btn-primary mt-2">Selengkapnya</a>
+          <a href="{{ url('/layanan') }}" class="btn btn-primary mt-2">Selengkapnya</a>
         </div>
       </div>
 
@@ -55,7 +55,7 @@
             Kelistrikan, Dimensi, Tekanan. Contoh alat ukur: Tangki/Storage Tank, Belt Conveyor,
             Flow Meter, Rotameter, Jembatan Timbang, Hammer Crusher, Rotary Sample Divider (RSD), dll.
           </p>
-          <a href="{{ url('/') }}" class="btn btn-primary mt-2">Selengkapnya</a>
+          <a href="{{ url('/layanan') }}" class="btn btn-primary mt-2">Selengkapnya</a>
         </div>
       </div>
 
@@ -71,7 +71,7 @@
             Kelistrikan, Dimensi, Tekanan. Contoh alat ukur: Tangki/Storage Tank, Belt Conveyor,
             Flow Meter, Rotameter, Jembatan Timbang, Hammer Crusher, Rotary Sample Divider (RSD), dll.
           </p>
-          <a href="{{ url('/') }}" class="btn btn-primary mt-2">Selengkapnya</a>
+          <a href="{{ url('/layanan') }}" class="btn btn-primary mt-2">Selengkapnya</a>
         </div>
       </div>
 
@@ -121,41 +121,95 @@
 </section>
 
 
-<!-- Gallery Section -->
-<section id="gallery" class="py-5">
-  <div class="container">
-    <div class="text-center mb-4">
-      <h2 class="section-heading">Gallery</h2>
-      <p class="text-muted text">Dokumentasi kegiatan & pelatihan</p>
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Our Services - Lingkup Kalibrasi</h2>
+        <p class="text-muted">Pilih kategori untuk melihat detail layanan kalibrasi kami.</p>
     </div>
+
     <div class="row g-4">
-      <div class="col-md-4 col-sm-6">
-        <div class="gallery-box">
-          <img src="{{ asset('images/img/alat1.jpg') }}" class="img-fluid rounded shadow" alt="Gallery 1">
-          <div class="gallery-caption">
-            <p>Pelatihan Alat Ukur</p>
-          </div>
+        <!-- Dimensi -->
+        <div class="col-md-3 text-center">
+            <a href="{{ route('kalibrasi.dimensi') }}" class="text-decoration-none text-dark">
+                <i class="bi bi-rulers fs-1 text-primary" ></i>
+                <h5 class="fw-bold mt-2">Dimensi</h5>
+                <p class="text-muted small">Outside Micrometer, Caliper, Thickness Gauge, dll</p>
+            </a>
         </div>
-      </div>
-      <div class="col-md-4 col-sm-6">
-        <div class="gallery-box">
-          <img src="{{ asset('images/img/alat2.jpg') }}" class="img-fluid rounded shadow" alt="Gallery 2">
-          <div class="gallery-caption">
-            <p>Workshop Instrumental</p>
-          </div>
+
+        <!-- Massa -->
+        <div class="col-md-3 text-center">
+            <a href="{{ route('kalibrasi.massa') }}" class="text-decoration-none text-dark">
+                <i class="bi bi-basket2-fill fs-1 text-primary"></i>
+                <h5 class="fw-bold mt-2">Massa</h5>
+                <p class="text-muted small">Balance (electronic, mechanic), Timbangan, dll</p>
+            </a>
         </div>
-      </div>
-      <div class="col-md-4 col-sm-6">
-        <div class="gallery-box">
-          <img src="{{ asset('images/img/alat3.png') }}" class="img-fluid rounded shadow" alt="Gallery 3">
-          <div class="gallery-caption">
-            <p>Dokumentasi Lapangan</p>
-          </div>
+
+        <!-- Suhu -->
+        <div class="col-md-3 text-center">
+            <a href="{{ route('kalibrasi.suhu') }}" class="text-decoration-none text-dark">
+                <i class="bi bi-thermometer-half fs-1 text-primary"></i>
+                <h5 class="fw-bold mt-2">Suhu</h5>
+                <p class="text-muted small">Waterbath, Oven, Furnace, dll</p>
+            </a>
         </div>
-      </div>
+
+        <!-- Tekanan -->
+        <div class="col-md-3 text-center">
+            <a href="{{ route('kalibrasi.tekanan') }}" class="text-decoration-none text-dark">
+                <i class="bi bi-speedometer2 fs-1 text-primary"></i>
+                <h5 class="fw-bold mt-2">Tekanan</h5>
+                <p class="text-muted small">Pressure Gauge, Transmitter, Pneumatic, dll</p>
+            </a>
+        </div>
+
+        <!-- Gaya -->
+        <div class="col-md-3 text-center">
+            <a href="{{ route('kalibrasi.gaya') }}" class="text-decoration-none text-dark">
+                <i class="bi bi-hammer fs-1 text-primary"></i>
+                <h5 class="fw-bold mt-2">Gaya</h5>
+                <p class="text-muted small">Push Pull Gauge, Torque Meter, dll</p>
+            </a>
+        </div>
+
+        <!-- Kekerasan -->
+        <div class="col-md-3 text-center">
+            <a href="{{ route('kalibrasi.kekerasan') }}" class="text-decoration-none text-dark">
+                <i class="bi bi-grid-1x2-fill fs-1 text-primary"></i>
+                <h5 class="fw-bold mt-2">Kekerasan</h5>
+                <p class="text-muted small">Hardness Tester, Hardness Block, Durometer</p>
+            </a>
+        </div>
+
+        <!-- Volume -->
+        <div class="col-md-3 text-center">
+            <a href="{{ route('kalibrasi.volume') }}" class="text-decoration-none text-dark">
+                <i class="bi bi-cup-straw fs-1 text-primary"></i>
+                <h5 class="fw-bold mt-2">Volume</h5>
+                <p class="text-muted small">Buret, Pipet Volume, Labu Ukur, Gelas Ukur</p>
+            </a>
+        </div>
+
+        <!-- Waktu & Frekuensi -->
+        <div class="col-md-3 text-center">
+            <a href="{{ route('kalibrasi.waktu-frekuensi') }}" class="text-decoration-none text-dark">
+                <i class="bi bi-stopwatch-fill fs-1 text-primary"></i>
+                <h5 class="fw-bold mt-2">Waktu & Frekuensi</h5>
+                <p class="text-muted small">Stopwatch, Frequency Meter, Tachometer</p>
+            </a>
+        </div>
+
+        <!-- Instrumen Analitik -->
+        <div class="col-md-3 text-center">
+            <a href="{{ route('kalibrasi.instrumen-analitik') }}" class="text-decoration-none text-dark">
+                <i class="bi bi-droplet-half fs-1 text-primary"></i>
+                <h5 class="fw-bold mt-2">Instrumen Analitik</h5>
+                <p class="text-muted small">pH Meter, Conductivity, Viscometer, dll</p>
+            </a>
+        </div>
     </div>
-  </div>
-</section>
+</div>
 
 <!-- News Section -->
 <section id="berita" class="py-5">
@@ -189,7 +243,7 @@
       <p class="text-muted">Perusahaan dan organisasi yang telah bekerja sama dengan kami</p>
     </div>
     <div class="row g-4">
-      @foreach (['kalbe-logo.png','totalpack-logo.png','magna-logo.png','marutake-logo.png'] as $logo)
+      @foreach (['kalbe-logo.png','totalpack-logo.png','magna-logo.png','marutake-logo.png', 'pt_tsh.png', 'logo-trix.png', 'fasi-logo.png'] as $logo)
       <div class="col-6 col-md-3 text-center">
         <div class="client-card p-3 shadow-sm bg-white rounded">
           <img src="{{ asset('images/client/' . $logo) }}" alt="Client" class="img-fluid client-img">

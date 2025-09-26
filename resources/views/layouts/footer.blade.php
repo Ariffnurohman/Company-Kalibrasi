@@ -10,7 +10,7 @@
                     <li><a href="#" class="text-light text-decoration-none">Sertifikasi Peserta</a></li>
                 </ul>
                 <div class="mt-2">
-                    <img src="{{ asset('images/kan logo.png') }}"
+                    <img src="{{ asset('images/img/logo_kan.png') }}"
                         alt="Logo KAN"
                         style="width: 150px; height: auto;">
                 </div>

@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name', 'Company Profile') }}</title>
+    <title>RST CALIBRATION</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/rukun-logo_5.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/layanan.css') }}">
@@ -12,6 +13,9 @@
     <link rel="stylesheet" href="{{ asset('css/clients.css') }}">
     <link rel="stylesheet" href="{{ asset('css/gallery.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+
 
     
     <!-- AOS CSS -->

@@ -1,8 +1,8 @@
 /* Hero Layanan */
 .service-hero {
-    background: linear-gradient(rgba(35, 63, 128, 0.8), rgba(35, 63, 128, 0.8)),
-                url('../images/hero-services.jpg') center/cover no-repeat;
-    min-height: 50vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('../images/berita/') center/cover no-repeat;
+    min-height: 60vh;
   }
   
   /* Card Layanan */

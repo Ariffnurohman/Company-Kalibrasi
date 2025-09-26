@@ -15,7 +15,7 @@
                 <li class="nav-item"><a class="nav-link" href="clients">Klien Kami</a></li>
                 <li class="nav-item"><a class="nav-link" href="berita">Berita</a></li>
                 <li class="nav-item"><a class="nav-link" href="gallery">Gallery</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Kontak Kami</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact  ">Kontak Kami</a></li>
                 <li class="nav-item">
                     <button id="theme-toggle" class="btn btn-sm btn-outline-light ms-3">
                         🌙
