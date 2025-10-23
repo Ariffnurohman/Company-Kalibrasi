@@ -37,7 +37,7 @@
             <img src="{{ asset('images/icons/icon2.png') }}" alt="Pelatihan" class="mb-3" width="70">
             <h5 class="card-title fw-bold">Pelatihan</h5>
             <p class="card-text">Program pelatihan untuk teknisi dan karyawan agar memahami cara penggunaan & pemeliharaan alat ukur.</p>
-            <a href="#" class="btn btn-primary">Selengkapnya</a>
+            <a href="pelatihan" class="btn btn-primary">Selengkapnya</a>
           </div>
         </div>
       </div>

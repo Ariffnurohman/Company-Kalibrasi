@@ -10,7 +10,7 @@
 
     <div class="row g-4">
     <div class="row g-4">
-      @foreach (['kalbe-logo.png','totalpack-logo.png','magna-logo.png','marutake-logo.png', 'pt_tsh.png', 'logo-trix.png', 'fasi-logo.png'] as $logo)
+      @foreach (['kalbe-logo.png','totalpack-logo.png','magna-logo.png','marutake-logo.png', 'pt_tsh.png', 'logo-trix.png', 'fasi-logo.png', 'fuji-seat-logo.png' ] as $logo)
       <div class="col-6 col-md-3 text-center">
         <div class="client-card p-3 shadow-sm bg-white rounded">
           <img src="{{ asset('images/client/' . $logo) }}" alt="Client" class="img-fluid client-img">

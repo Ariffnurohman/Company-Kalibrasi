@@ -55,3 +55,15 @@ Route::prefix('lingkup-kalibrasi')->group(function () {
     Route::view('/instrumen-analitik', 'lingkup-kalibrasi.instrumen-analitik')->name('kalibrasi.instrumen-analitik');
 });
 
+Route::view('/lingkup-kalibrasi/home', 'home');
+Route::view('/lingkup-kalibrasi/about', 'about');
+Route::view('/lingkup-kalibrasi/layanan', 'layanan');
+Route::view('/lingkup-kalibrasi/clients', 'clients');
+Route::view('/lingkup-kalibrasi/berita', 'berita');
+Route::view('/lingkup-kalibrasi/gallery', 'gallery');
+Route::view('/lingkup-kalibrasi/contact', 'contact');
+
+
+Route::get('/pelatihan', function () {
+    return view('pelatihan.index');
+})->name('pelatihan.index');
