@@ -48,6 +48,7 @@
             once: true // hanya sekali animasi (tidak ulang saat scroll naik)
         });
     </script>
+
 </body>
 
 </html>

@@ -9,11 +9,17 @@
 
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <ul class="list-group shadow-sm">
-                <li class="list-group-item">Outside Micrometer</li>
-                <li class="list-group-item">Caliper</li>
-                <li class="list-group-item">Thickness Gauge</li>
-                <li class="list-group-item">Dll</li>
+            <ul class="list-group shadow-lg">
+                
+                <li class="list-group-item" style="font-weight: bold;">Outside Micrometer<br>
+                <img src="{{ asset('images/img/micrometer-outside.jpg') }}" alt="Outside Micrometer" width="120">
+            </li>
+            <li class="list-group-item" style="font-weight: bold;">Caliper<br>
+            <img src="{{ asset('images/img/caliper.png') }}" alt="Outside Micrometer" width="120">
+        </li>
+                <li class="list-group-item" style="font-weight: bold;">Thickness Gauge<br>
+                <img src="{{ asset('images/img/thickness.png') }}" alt="Thickness Gauge" width="120">
+                </li>
             </ul>
         </div>
     </div>

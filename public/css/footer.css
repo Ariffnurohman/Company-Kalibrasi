@@ -8,3 +8,37 @@
     color: #f46f20;
   }
   
+.visitor-stats {
+    background-color: #1e1f23;
+    color: #d1d1d1;
+    padding: 15px 25px;
+    border-top: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.visitor-stats .item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.visitor-stats .item:hover {
+    transform: translateY(-2px);
+}
+
+.visitor-stats .label {
+    color: #bbb;
+}
+
+.visitor-stats .value {
+    font-weight: 600;
+    color: #00bfff;
+}

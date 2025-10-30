@@ -49,4 +49,27 @@
             <p class="mb-0">&copy; {{ date('Y') }} PT Rukun Sejahtera Teknik. All rights reserved.</p>
         </div>
     </div>
+  <div class="visitor-stats">
+    <div class="item">
+        <span class="label">👥 Total Pengunjung:</span>
+        <span id="total" class="value">0</span>
+    </div>
+    <div class="item">
+        <span class="label">🟢 Pengunjung Online:</span>
+        <span id="online" class="value">0</span>
+    </div>
+</div>
+
+<script>
+function updateStats() {
+    fetch('/api/visitors')
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('total').textContent = data.total;
+            document.getElementById('online').textContent = data.online;
+        });
+}
+updateStats();
+setInterval(updateStats, 10000);
+</script>
 </footer>

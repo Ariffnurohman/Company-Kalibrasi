@@ -2,7 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\VisitorController;
+use App\Models\Visitor;
+use Carbon\Carbon;
 
+Route::get('/stats', [VisitorController::class, 'index'])->name('stats');
+
+Route::get('/api/visitors', function () {
+    return response()->json([
+        'total' => Visitor::count(),
+        'online' => Visitor::where('last_activity', '>=', Carbon::now()->subMinutes(5))->count(),
+    ]);
+});
 
 Route::get('/', function () {
     return view('home');
