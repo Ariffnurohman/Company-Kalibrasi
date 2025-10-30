@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Hero Section -->
+
+  <!-- Hero Section -->
 <section class="about-hero text-center text-white d-flex align-items-center">
   <div class="container">
     <h1 class="display-4 fw-bold">Tentang Kami</h1>

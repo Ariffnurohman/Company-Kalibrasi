@@ -4,13 +4,13 @@
 <div id="heroCarousel" class="carousel slide mt-6" data-aos="zoom-in" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="{{ asset('images/hero1.png') }}" class="d-block w-100 img-fluid" alt="Hero 1">
+      <img src="{{ asset('images/banner1.jpg') }}" class="d-block w-100 img-fluid" alt="Hero 1">
     </div>
     <div class="carousel-item">
-      <img src="{{ asset('images/hero1.png') }}" class="d-block w-100 img-fluid" alt="Hero 2">
+      <img src="{{ asset('images/banner2.png') }}" class="d-block w-100 img-fluid" alt="Hero 2">
     </div>
     <div class="carousel-item">
-      <img src="{{ asset('images/hero1.png') }}" class="d-block w-100 img-fluid" alt="Hero 3">
+      <img src="{{ asset('images/banner3.png') }}" class="d-block w-100 img-fluid" alt="Hero 3">
     </div>
   </div>
   <!-- Tombol navigasi -->
@@ -109,7 +109,7 @@
                 dengan biaya terendah dan kualitas tertinggi, serta memberikan jaminan kepercayaan kepada semua pelanggan.
               </p>
               <div class="text-center text-md-start mt-3">
-                <a href="{{ url('/tentang-kami') }}" class="btn btn-primary">Selengkapnya</a>
+                <a href="{{ url('/about') }}" class="btn btn-primary">Selengkapnya</a>
               </div>
             </div>
 
