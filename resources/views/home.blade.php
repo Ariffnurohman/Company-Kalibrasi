@@ -4,13 +4,13 @@
 <div id="heroCarousel" class="carousel slide mt-6" data-aos="zoom-in" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="{{ asset('images/banner4.png') }}" class="d-block w-100 img-fluid" alt="Hero 1">
+      <img src="{{ asset('images/banner/banner1.png') }}" class="d-block w-100 img-fluid" alt="Hero 1">
     </div>
     <div class="carousel-item">
-      <img src="{{ asset('images/banner4.png') }}" class="d-block w-100 img-fluid" alt="Hero 2">
+      <img src="{{ asset('images/banner/banner2.png') }}" class="d-block w-100 img-fluid" alt="Hero 2">
     </div>
     <div class="carousel-item">
-      <img src="{{ asset('images/banner4.png') }}" class="d-block w-100 img-fluid" alt="Hero 3">
+      <img src="{{ asset('images/banner/banner3.png') }}" class="d-block w-100 img-fluid" alt="Hero 3">
     </div>
   </div>
   <!-- Tombol navigasi -->

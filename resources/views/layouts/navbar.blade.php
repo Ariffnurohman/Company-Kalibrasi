@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light shadow-sm fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="{{ url('home') }}">
             <img src="{{ asset('images/rukun-logo_5.png') }}" alt="RUKUN" height="50">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -16,10 +16,6 @@
                 <li class="nav-item"><a class="nav-link" href="berita">Berita</a></li>
                 <li class="nav-item"><a class="nav-link" href="gallery">Gallery</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact  ">Kontak Kami</a></li>
-                <li class="nav-item">
-                    <button id="theme-toggle" class="btn btn-sm btn-outline-light ms-3">
-                        🌙
-                    </button>
                 </li>   
             </ul>
         </div>

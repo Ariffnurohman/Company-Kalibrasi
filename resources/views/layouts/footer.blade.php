@@ -10,6 +10,12 @@
                     <li><a href="#" class="text-light text-decoration-none">Sertifikasi Peserta</a></li>
                 </ul>
                 <div class="mt-2">
+                   <img src="{{ asset('images/ISO-NEW-EDIT.png') }}"
+                       alt="Logo ISO"
+                       style="width: 150px; height: auto;">
+               </div>
+
+                <div class="mt-2">
                     <img src="{{ asset('images/logo-kan-kalibrasi.png') }}"
                         alt="Logo KAN"
                         style="width: 150px; height: auto;">
@@ -24,6 +30,7 @@
                 <p>Website: rukun.id</p>
             </div>
 
+
             <!-- Cabang Rukun -->
             <div class="col-md-4 mb-4">
                 <h5 class="footer-heading">PT RUKUN SEJAHTERA TEKNIK</h5>
@@ -36,7 +43,7 @@
 
             <!-- Alamat + Google Maps -->
             <div class="col-md-4 mb-4">
-                <h5 class="footer-heading">Alamat & Lokasi</h5>
+                <h5 class="footer-heading">Labolatorium</h5>
                 <p>JL. RAYA TELUKJAMBE N0.8 KSB RAYA 8</p>
                 <p>KARAWANG SENTRA BIZHUB, KARAWANG</p>
                 <div class="map-container mt-2">
@@ -44,6 +51,28 @@
                 </div>
             </div>
         </div>
+        
+<!--Floating Whatsapp -->
+        <div class="wa-container">
+            <div class="wa-popup" id="waPopup">
+                <div class="wa-header">
+                    <i class="fa fa-whatsapp"></i>
+                    <span>Butuh Bantuan?</span>
+                    <button id="waClose">&times;</button>
+            </div>
+
+            <div class="wa-body">
+                <p>Halo<br>Ada yang Bisa Kami Bantu?</p>
+                      <a href="https://wa.me/6281234567890" target="_blank" class="wa-chat-btn">
+        <i class="fa fa-whatsapp"></i> Chat via WhatsApp
+      </a>
+    </div>
+  </div>
+
+   <button class="wa-float" id="waButton">
+  <img src="images/icon/icon-wa.png" alt="WhatsApp" class="wa-icon">
+</button>
+</div>
 
         <div class="text-center mt-4">
             <p class="mb-0">&copy; {{ date('Y') }} PT Rukun Sejahtera Teknik. All rights reserved.</p>
