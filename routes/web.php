@@ -3,9 +3,31 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Models\Visitor;
 use Carbon\Carbon;
 
+Route::get('/', function () {
+    return view('home');
+});
+
+/// ROUTE ADMIN
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
+    ->middleware('auth')
+    ->name('admin.dashboard');
+
+
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('orders', OrderController::class);
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('orders', App\Http\Controllers\Admin\OrderController::class);
+});
+
+
+// Stats
 Route::get('/stats', [VisitorController::class, 'index'])->name('stats');
 
 Route::get('/api/visitors', function () {
@@ -15,45 +37,22 @@ Route::get('/api/visitors', function () {
     ]);
 });
 
-Route::get('/', function () {
-    return view('home');
-});
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+// Halaman utama
+Route::view('/home', 'home')->name('home');
+Route::view('/about', 'about')->name('about');
+Route::view('/layanan', 'layanan')->name('layanan');
+Route::view('/clients', 'clients')->name('clients');
+Route::view('/berita', 'berita')->name('berita');
+Route::view('/gallery', 'gallery')->name('gallery');
+Route::view('/contact', 'contact')->name('contact.index');
 
-Route::get('/layanan', function () {
-    return view('layanan');
-})->name('layanan');
 
-Route::get('/clients', function () {
-    return view('clients');
-})->name('clients');
-
-Route::get('/berita', function () {
-    return view('berita');
-})->name('berita');
-
-Route::get('/gallery', function () {
-    return view('gallery');
-})->name('gallery');
-
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact.index');
-
+// Contact Form
 Route::post('/contact', [ContactController::class, 'offer'])->name('contact.offer');
 
-Route::view('/home', 'home');
-Route::view('/about', 'about');
-Route::view('/layanan', 'layanan');
-Route::view('/clients', 'clients');
-Route::view('/berita', 'berita');
-Route::view('/gallery', 'gallery');
-Route::view('/contact', 'contact');
 
-
+// Lingkup Kalibrasi
 Route::prefix('lingkup-kalibrasi')->group(function () {
     Route::view('/dimensi', 'lingkup-kalibrasi.dimensi')->name('kalibrasi.dimensi');
     Route::view('/massa', 'lingkup-kalibrasi.massa')->name('kalibrasi.massa');
@@ -66,15 +65,20 @@ Route::prefix('lingkup-kalibrasi')->group(function () {
     Route::view('/instrumen-analitik', 'lingkup-kalibrasi.instrumen-analitik')->name('kalibrasi.instrumen-analitik');
 });
 
-Route::view('/lingkup-kalibrasi/home', 'home');
-Route::view('/lingkup-kalibrasi/about', 'about');
-Route::view('/lingkup-kalibrasi/layanan', 'layanan');
-Route::view('/lingkup-kalibrasi/clients', 'clients');
-Route::view('/lingkup-kalibrasi/berita', 'berita');
-Route::view('/lingkup-kalibrasi/gallery', 'gallery');
-Route::view('/lingkup-kalibrasi/contact', 'contact');
+
+// Halaman Pelatihan
+Route::view('/pelatihan', 'pelatihan.index')->name('pelatihan.index');
 
 
-Route::get('/pelatihan', function () {
-    return view('pelatihan.index');
-})->name('pelatihan.index');
+// *** Route Auth dari Breeze ***
+require __DIR__.'/auth.php';
+
+
+// Rahasia
+
+Route::get('/force-logout', function () {
+    auth()->logout();
+    session()->invalidate();
+    session()->regenerateToken();
+    return 'LOGOUT SUCCESS';
+});
