@@ -26,6 +26,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('orders', App\Http\Controllers\Admin\OrderController::class);
 });
 
+// Teknisi
+
+Route::middleware(['auth', 'role:teknisi'])
+    ->prefix('technician')
+    ->name('technician.')
+    ->group(function () {
+        Route::get('/technician/dashboard', [App\Http\Controllers\TechnicianDashboardController::class, 'index'])
+            ->name('dashboard');
+
+        Route::get('/orders', [App\Http\Controllers\Technician\OrderController::class, 'index'])
+            ->name('orders.index');
+
+        Route::get('/orders/{id}', [App\Http\Controllers\Technician\OrderController::class, 'show'])
+            ->name('orders.show');
+
+        Route::post('/orders/{id}/status', [App\Http\Controllers\Technician\OrderController::class, 'updateStatus'])
+            ->name('orders.updateStatus');
+    });
+
+
+
+
 
 // Stats
 Route::get('/stats', [VisitorController::class, 'index'])->name('stats');

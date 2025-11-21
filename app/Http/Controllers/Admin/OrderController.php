@@ -19,22 +19,30 @@ class OrderController extends Controller
         return view('admin.orders.create');
     }
 
-public function store(Request $request)
-{
-    $request->validate([
-        'customer_name' => 'required',
-        'instrument' => 'required',
-        'status' => 'required',
-    ]);
-        Order::create([
-            'order_number' => 'ORD-' . time(),
-            'customer_name' => $request->customer_name,
-            'instrument' => $request->instrument,
-            'status' => 'Pending',
-            'received_date' => now(),
+    public function store(Request $request)
+    {
+        $request->validate([
+            'customer_name' => 'required',
+            'instrument' => 'required',
         ]);
 
-        return redirect()->route('admin.orders.index')->with('success', 'Order created successfully.');
+        Order::create([
+            'order_number'   => 'ORD-' . time(),
+            'customer_name'  => $request->customer_name,
+            'instrument'     => $request->instrument,
+            'status'         => 'Pending',      // default
+            'received_date'  => now(),
+        ]);
+
+        return redirect()->route('admin.orders.index')
+            ->with('success', 'Order created successfully.');
+    }
+
+    // 🔵 DETAIL ORDER
+    public function show($id)
+    {
+        $order = Order::findOrFail($id);
+        return view('admin.orders.show', compact('order'));
     }
 
     public function edit($id)
@@ -45,18 +53,29 @@ public function store(Request $request)
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'customer_name' => 'required',
+            'instrument' => 'required',
+            'status' => 'required',
+        ]);
+
         $order = Order::findOrFail($id);
 
-        $order->update($request->all());
+        $order->update([
+            'customer_name'  => $request->customer_name,
+            'instrument'     => $request->instrument,
+            'status'         => $request->status,
+            'received_date'  => $request->received_date,
+            'completed_date' => $request->completed_date,
+        ]);
 
-        return redirect()->route('admin.orders.index')->with('success', 'Order updated.');
+        return redirect()->route('admin.orders.index')
+            ->with('success', 'Order updated.');
     }
 
     public function destroy($id)
     {
         Order::findOrFail($id)->delete();
-
         return back()->with('success', 'Order deleted.');
     }
 }
-

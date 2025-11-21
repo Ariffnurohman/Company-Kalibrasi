@@ -1,0 +1,231 @@
+/* --------------------------------------------- */
+/*                GLOBAL RESET                   */
+/* --------------------------------------------- */
+
+body {
+    background: #f5f6fa;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* --------------------------------------------- */
+/*                  SIDEBAR                      */
+/* --------------------------------------------- */
+
+.mate-sidebar {
+    width: 260px;
+    background: #ffffff;
+    min-height: 100vh;
+    border-right: 1px solid #e5e7eb;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar-header {
+    padding: 10px 0 25px;
+}
+
+.sidebar-header h4 {
+    color: #111827;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding-left: 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #4b5563;
+    transition: 0.2s ease;
+}
+
+.menu-item i {
+    font-size: 18px;
+}
+
+.menu-item:hover {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+.menu-item.active {
+    background: #3b82f6;
+    color: white !important;
+}
+
+/* --------------------------------------------- */
+/*                  TOP NAV                       */
+/* --------------------------------------------- */
+
+.mate-topnav {
+    border-bottom: 1px solid #e5e7eb;
+    height: 60px;
+}
+
+/* --------------------------------------------- */
+/*                MAIN CONTENT                    */
+/* --------------------------------------------- */
+
+.mate-main {
+    background: #f8fafc;
+}
+
+/* --------------------------------------------- */
+/*                CARDS STYLE                     */
+/* --------------------------------------------- */
+
+.mate-card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+    border: 1px solid #e5e7eb;
+    transition: 0.2s ease;
+}
+
+.mate-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.09);
+}
+
+/* --------------------------------------------- */
+/*                BUTTONS                         */
+/* --------------------------------------------- */
+
+.mate-btn-primary {
+    background: #3b82f6;
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    transition: 0.2s ease;
+}
+
+.mate-btn-primary:hover {
+    background: #2563eb;
+}
+
+.mate-btn-secondary {
+    background: #e5e7eb;
+    color: #374151;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.mate-btn-secondary:hover {
+    background: #d1d5db;
+}
+
+/* --------------------------------------------- */
+/*                INPUT FIELDS                    */
+/* --------------------------------------------- */
+
+.mate-input {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb !important;
+    padding: 12px 14px;
+    border-radius: 10px;
+    transition: 0.2s ease;
+}
+
+.mate-input:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+    background: white;
+    outline: none !important;
+}
+
+/* --------------------------------------------- */
+/*                TABLE STYLE                     */
+/* --------------------------------------------- */
+
+.mate-table {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.mate-table thead {
+    background: #f3f4f6;
+}
+
+.mate-table th {
+    padding: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.mate-table td {
+    padding: 14px;
+    color: #4b5563;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* --------------------------------------------- */
+/*                BADGE STATUS                    */
+/* --------------------------------------------- */
+
+.badge-status {
+    padding: 7px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge-processing {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.badge-calibration {
+    background: #f0f9ff;
+    color: #0284c7;
+}
+
+.badge-waiting {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+.badge-completed {
+    background: #dcfce7;
+    color: #166534;
+}
+
+/* --------------------------------------------- */
+/*           ANIMATION & HOVER EFFECTS            */
+/* --------------------------------------------- */
+
+.mate-hover-lift {
+    transition: 0.2s ease;
+}
+
+.mate-hover-lift:hover {
+    transform: translateY(-3px);
+}
+
+/* --------------------------------------------- */
+/*           RESPONSIVE FIX                       */
+/* --------------------------------------------- */
+
+@media(max-width: 992px) {
+    .mate-sidebar {
+        display: none;
+    }
+}

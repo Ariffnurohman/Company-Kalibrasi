@@ -10,6 +10,8 @@ return [
 
             // tambahkan ini
             'is_admin' => \App\Http\Middleware\IsAdmin::class,
+
+
         ],
 
     ],

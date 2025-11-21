@@ -28,7 +28,18 @@ public function store(LoginRequest $request): RedirectResponse
 
     $request->session()->regenerate();
 
-    return redirect()->intended(route('admin.dashboard'));
+    $user = Auth::user();
+
+    if ($user->role === 'admin') {
+        return redirect()->route('admin.dashboard');
+    }
+
+    if ($user->role === 'technician') {
+        return redirect()->route('technician.dashboard');
+    }
+
+    // default jika role lain
+    return redirect('/home');
 }
 
     /**

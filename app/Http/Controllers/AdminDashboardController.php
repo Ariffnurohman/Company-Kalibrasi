@@ -8,26 +8,30 @@ use Illuminate\Http\Request;
 class AdminDashboardController extends Controller
 {
     public function index()
-    {
-        // Total semua order
-        $totalOrders = Order::count();
+{
+    $totalOrders = Order::count();
+    $totalRevenue = Order::sum('total_price');
+    $completedOrders = Order::where('status', 'completed')->count();
+    $pendingOrders = Order::where('status', 'pending')->count();
 
-        // Order yang sudah selesai
-        $completedOrders = Order::where('status', 'Completed')->count();
+    // --- Chart Data ---
+    $months = [];
+    $ordersChart = [];
+    $revenueChart = [];
 
-        // Data chart bulanan
-        $salesData = Order::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
-            ->groupBy('month')
-            ->pluck('total', 'month');
+    for ($i = 1; $i <= 12; $i++) {
+        $months[] = date("M", mktime(0,0,0,$i,1));
 
-        // Order terbaru
-        $latestOrders = Order::latest()->take(5)->get();
-
-        return view('admin.dashboard', compact(
-            'totalOrders',
-            'completedOrders',
-            'salesData',
-            'latestOrders'
-        ));
+        $ordersChart[] = Order::whereMonth('created_at', $i)->count();
+        $revenueChart[] = Order::whereMonth('created_at', $i)->sum('total_price');
     }
+
+    $recentOrders = Order::latest()->take(6)->get();
+
+    return view('admin.dashboard', compact(
+        'totalOrders', 'totalRevenue', 'completedOrders', 'pendingOrders',
+        'months', 'ordersChart', 'revenueChart', 'recentOrders'
+    ));
+}
+
 }

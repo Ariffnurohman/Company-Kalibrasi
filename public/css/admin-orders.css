@@ -1,74 +1,64 @@
-/* Container */
-.orders-container {
+/* ========== SIDEBAR ========== */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background: #111827;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar-title h4 {
+    font-weight: 600;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding-left: 0;
     margin-top: 20px;
 }
 
-/* Card styling */
-.orders-card {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
+.sidebar-menu li {
+    margin-bottom: 8px;
 }
 
-.orders-card-header {
-    background: #0d6efd;
-    color: white;
-    padding: 15px 20px;
-    font-size: 18px;
-    font-weight: bold;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+.sidebar-menu a {
+    display: block;
+    padding: 10px 18px;
+    color: #d1d5db;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.2s;
 }
 
-/* Table */
-.orders-table {
-    width: 100%;
-    border-collapse: collapse;
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+    background: #1f2937;
+    color: #fff;
 }
 
-.orders-table th {
+/* ========== CONTENT WRAPPER ========== */
+.content-wrapper {
     background: #f8f9fa;
-    padding: 12px;
-    text-transform: uppercase;
-    font-size: 12px;
-    color: #555;
-    border-bottom: 2px solid #dee2e6;
+    min-height: 100vh;
 }
 
-.orders-table td {
-    padding: 12px;
-    border-bottom: 1px solid #dee2e6;
-}
-
-/* Zebra rows */
-.orders-table tbody tr:nth-child(even) {
-    background: #f5f7ff;
-}
-
-/* Empty state */
-.orders-empty {
-    color: #aaa;
-    padding: 25px 0;
-    font-style: italic;
-}
-
-/* Button styling */
-.btn-add-order {
-    margin-bottom: 15px;
-    border-radius: 8px !important;
-    font-weight: bold;
-    padding: 8px 16px;
-}
-
-/* Action buttons */
-.orders-action-btn {
-    border-radius: 6px !important;
-    padding: 6px 10px;
-    font-size: 12px;
-}
-
-/* Badge status */
+/* ========== STATUS BADGES ========== */
 .badge {
     padding: 6px 10px;
-    font-size: 12px;
     border-radius: 6px;
+    font-size: 12px;
 }
+
+.status-pending { background: #ffe8a1; color: #8a6d00; }
+.status-processing { background: #cfe2ff; color: #084298; }
+.status-calibration { background: #d1e7dd; color: #0f5132; }
+.status-waiting { background: #f8d7da; color: #842029; }
+.status-completed { background: #d1e7dd; color: #0f5132; }
+
+/* TABLE */
+.table > :not(caption) > * > * {
+    vertical-align: middle;
+}
+
+

@@ -2,35 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/admin-orders.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Admin Dashboard</title>
+    <title>Admin Panel</title>
 
-    @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Global Mate-UI CSS -->
+    <link rel="stylesheet" href="{{ asset('css/mate-admin.css') }}">
+
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-light">
 
-<div class="flex">
-    <!-- Sidebar -->
-    <aside class="w-64 bg-gray-800 text-white min-h-screen p-5">
-        <h1 class="text-lg font-bold mb-6">Calibration Services</h1>
+<div class="d-flex">
 
-        <nav class="space-y-3">
-            <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 bg-gray-700 rounded">Dashboard</a>
-             <a href="{{ route('admin.orders.index') }}" class="block px-4 py-2 bg-gray-700 rounded">Orders</a>
-        </nav>
+    <!-- SIDEBAR -->
+    <aside class="mate-sidebar shadow-sm">
+        <div class="sidebar-header">
+            <h4 class="fw-bold mb-0">Admin</h4>
+            <span class="text-muted small">Control Panel</span>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li>
+                <a href="{{ route('admin.dashboard') }}" class="menu-item {{ request()->is('admin/dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('admin.orders.index') }}" class="menu-item {{ request()->is('admin/orders*') ? 'active' : '' }}">
+                    <i class="bi bi-receipt-cutoff"></i> Orders
+                </a>
+            </li>
+
+            <li>
+                <a href="#" class="menu-item">
+                    <i class="bi bi-gear"></i> Settings
+                </a>
+            </li>
+        </ul>
     </aside>
-    <!-- Main Content -->
-    <main class="flex-1 p-8">
-        @yield('content')
-    </main>
 
+    <!-- MAIN CONTENT -->
+    <main class="mate-main flex-grow-1">
+
+        <!-- TOP NAV -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mate-topnav">
+            <div class="container-fluid">
+                <span class="fw-semibold fs-5">Admin Panel</span>
+
+                <div class="dropdown ms-auto">
+                    <button class="btn btn-light border dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle me-1"></i> Admin
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form action="#" method="POST">
+                                <button class="dropdown-item text-danger">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- PAGE CONTENT -->
+        <div class="p-4">
+            @yield('content')
+        </div>
+
+    </main>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,18 @@
+.form-control-lg, .form-select-lg {
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.card {
+    border-radius: 14px;
+}
+
+.btn-lg {
+    padding: 12px;
+    border-radius: 12px;
+}
+
+label.form-label {
+    font-size: 15px;
+    color: #555;
+}

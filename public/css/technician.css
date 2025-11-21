@@ -1,0 +1,18 @@
+.sidebar {
+    min-height: 100vh;
+    border-right: 1px solid #e5e7eb;
+}
+
+.sidebar a {
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.sidebar a:hover {
+    background: #f3f4f6;
+}
+
+.content-wrapper {
+    background: #f9fafb;
+}

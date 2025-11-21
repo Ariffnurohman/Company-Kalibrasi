@@ -14,7 +14,14 @@ return Application::configure(basePath: dirname(__DIR__))
         // Daftarkan middleware web kamu di sini
         $middleware->web([
             \App\Http\Middleware\TrackVisitor::class,
+            
         ]);
+
+         $middleware->alias([
+        'role' => \App\Http\Middleware\RoleMiddleware::class,
+        'is_admin' => \App\Http\Middleware\IsAdmin::class,
+    ]);
+    
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
