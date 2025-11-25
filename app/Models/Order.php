@@ -16,6 +16,13 @@ class Order extends Model
         'status',
         'received_date',
         'completed_date',
+        'technician_id',
     ];
+
+    public function technician()
+{
+    return $this->belongsTo(User::class, 'technician_id');
+}
+
 }
 

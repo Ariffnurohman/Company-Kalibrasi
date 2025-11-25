@@ -65,6 +65,22 @@
                             </div>
                         </div>
 
+                        <div class="mb-3">
+                            
+                        <label class="form-label">Assign Technician</label>
+                        <select name="technician_id" class="form-control">
+                            <option value="">-- No Technician --</option>
+
+                            @foreach($technicians as $tech)
+                                <option value="{{ $tech->id }}" 
+                                    {{ $order->technician_id == $tech->id ? 'selected' : '' }}>
+                                    {{ $tech->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
                         <!-- Update Button -->
                         <div class="mt-4">
                             <button class="btn btn-primary btn-lg w-100">

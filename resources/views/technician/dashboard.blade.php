@@ -1,4 +1,4 @@
-@extends('technician.layouts.technician')
+@extends('layouts.technician')
 
 @section('content')
 

@@ -13,38 +13,34 @@ Route::get('/', function () {
 });
 
 /// ROUTE ADMIN
-Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
-    ->middleware('auth')
-    ->name('admin.dashboard');
+Route::middleware(['auth', 'role:admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+            ->name('dashboard');
 
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
-    Route::resource('orders', OrderController::class);
-});
+        Route::resource('orders', App\Http\Controllers\Admin\OrderController::class);
+    });
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('orders', App\Http\Controllers\Admin\OrderController::class);
-});
-
-// Teknisi
-
-Route::middleware(['auth', 'role:teknisi'])
+/// ROUTE TEKNISI
+Route::middleware(['auth', 'role:technician'])
     ->prefix('technician')
     ->name('technician.')
     ->group(function () {
-        Route::get('/technician/dashboard', [App\Http\Controllers\TechnicianDashboardController::class, 'index'])
-            ->name('dashboard');
 
-        Route::get('/orders', [App\Http\Controllers\Technician\OrderController::class, 'index'])
+        Route::get('/dashboard', 
+            [\App\Http\Controllers\TechnicianDashboardController::class, 'index']
+        )->name('dashboard');
+
+                Route::get('/orders', [\App\Http\Controllers\Technician\OrderController::class, 'index'])
             ->name('orders.index');
 
-        Route::get('/orders/{id}', [App\Http\Controllers\Technician\OrderController::class, 'show'])
+        Route::get('/orders/{id}', [\App\Http\Controllers\Technician\OrderController::class, 'show'])
             ->name('orders.show');
 
-        Route::post('/orders/{id}/status', [App\Http\Controllers\Technician\OrderController::class, 'updateStatus'])
-            ->name('orders.updateStatus');
     });
-
 
 
 

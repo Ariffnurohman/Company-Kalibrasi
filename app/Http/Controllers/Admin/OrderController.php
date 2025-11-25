@@ -45,33 +45,39 @@ class OrderController extends Controller
         return view('admin.orders.show', compact('order'));
     }
 
-    public function edit($id)
-    {
-        $order = Order::findOrFail($id);
-        return view('admin.orders.edit', compact('order'));
-    }
+   public function edit($id)
+{
+    $order = Order::findOrFail($id);
+    $technicians = \App\Models\User::where('role', 'technician')->get();
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'customer_name' => 'required',
-            'instrument' => 'required',
-            'status' => 'required',
-        ]);
+    return view('admin.orders.edit', compact('order', 'technicians'));
+}
 
-        $order = Order::findOrFail($id);
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'customer_name' => 'required',
+        'instrument'    => 'required',
+        'status'        => 'required',
+        'technician_id' => 'nullable|exists:users,id',
+    ]);
 
-        $order->update([
-            'customer_name'  => $request->customer_name,
-            'instrument'     => $request->instrument,
-            'status'         => $request->status,
-            'received_date'  => $request->received_date,
-            'completed_date' => $request->completed_date,
-        ]);
+    $order = Order::findOrFail($id);
 
-        return redirect()->route('admin.orders.index')
-            ->with('success', 'Order updated.');
-    }
+    $order->update([
+        'customer_name'  => $request->customer_name,
+        'instrument'     => $request->instrument,
+        'status'         => $request->status,
+        'received_date'  => $request->received_date,
+        'completed_date' => $request->completed_date,
+        'technician_id'  => $request->technician_id,  // <── WAJIB ADA
+    ]);
+
+    return redirect()->route('admin.orders.index')
+        ->with('success', 'Order updated successfully!');
+}
+
+
 
     public function destroy($id)
     {
