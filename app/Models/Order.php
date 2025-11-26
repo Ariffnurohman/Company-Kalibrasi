@@ -17,6 +17,7 @@ class Order extends Model
         'received_date',
         'completed_date',
         'technician_id',
+        'qr_code', // <--- tambahkan ini
     ];
 
     public function technician()

@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\PublicController;
 use App\Models\Visitor;
 use Carbon\Carbon;
 
@@ -23,6 +24,21 @@ Route::middleware(['auth', 'role:admin'])
 
         Route::resource('orders', App\Http\Controllers\Admin\OrderController::class);
     });
+
+    Route::get('/tracking/{order_number}', [PublicController::class, 'tracking']);
+
+Route::get('/download-qr/{order}', function ($order) {
+
+    $url = url('/tracking/'.$order);
+
+    $qr = QrCode::format('png')
+        ->size(300)
+        ->generate($url);
+
+    return response($qr)
+        ->header('Content-Type', 'image/png')
+        ->header('Content-Disposition', 'attachment; filename="QR-'.$order.'.png"');
+})->name('download.qr');
 
 /// ROUTE TEKNISI
 Route::middleware(['auth', 'role:technician'])
@@ -45,15 +61,12 @@ Route::middleware(['auth', 'role:technician'])
 
 
 
-// Stats
-Route::get('/stats', [VisitorController::class, 'index'])->name('stats');
+// Form cek alat (landing page)
+Route::get('/cek-alat', [\App\Http\Controllers\PublicController::class, 'cekAlat'])->name('cek.alat');
 
-Route::get('/api/visitors', function () {
-    return response()->json([
-        'total' => Visitor::count(),
-        'online' => Visitor::where('last_activity', '>=', Carbon::now()->subMinutes(5))->count(),
-    ]);
-});
+// Proses pencarian order
+Route::post('/cek-alat', [\App\Http\Controllers\PublicController::class, 'cekAlatProcess'])->name('cek.alat.process');
+
 
 
 // Halaman utama

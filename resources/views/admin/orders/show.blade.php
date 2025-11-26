@@ -126,7 +126,8 @@
         <!-- RIGHT COLUMN -->
         <div class="col-md-4">
 
-            <div class="card shadow-sm border-0">
+            <!-- ACTIONS CARD -->
+            <div class="card shadow-sm border-0 mb-4">
                 <div class="card-header bg-white py-3">
                     <h5 class="fw-bold mb-0">Actions</h5>
                 </div>
@@ -153,6 +154,31 @@
 
                 </div>
             </div>
+
+            <!-- QR CODE CARD -->
+            @if($order->qr_code)
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white py-3">
+                    <h5 class="fw-bold mb-0">QR Code Tracking</h5>
+                </div>
+                <div class="card-body text-center">
+
+                    <img src="data:image/png;base64,{{ $order->qr_code }}" 
+                        alt="QR Code" 
+                        class="img-fluid mb-3"
+                        style="max-width: 220px;">
+
+                    <small class="text-muted d-block mb-1">Scan untuk cek status</small>
+
+                    <a href="{{ url('/tracking/' . $order->order_number) }}" 
+                       target="_blank"
+                       class="btn btn-outline-primary btn-sm">
+                        Lihat Halaman Tracking
+                    </a>
+
+                </div>
+            </div>
+            @endif
 
         </div>
 

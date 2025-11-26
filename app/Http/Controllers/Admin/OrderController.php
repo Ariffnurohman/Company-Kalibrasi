@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class OrderController extends Controller
 {
@@ -19,24 +20,43 @@ class OrderController extends Controller
         return view('admin.orders.create');
     }
 
+    
     public function store(Request $request)
-    {
-        $request->validate([
-            'customer_name' => 'required',
-            'instrument' => 'required',
-        ]);
+{
+    $request->validate([
+        'customer_name' => 'required',
+        'instrument' => 'required',
+    ]);
 
-        Order::create([
-            'order_number'   => 'ORD-' . time(),
-            'customer_name'  => $request->customer_name,
-            'instrument'     => $request->instrument,
-            'status'         => 'Pending',      // default
-            'received_date'  => now(),
-        ]);
+    // 🔵 Generate nomor order
+    $orderNumber = 'ORD-' . time();
 
-        return redirect()->route('admin.orders.index')
-            ->with('success', 'Order created successfully.');
-    }
+    // 🔵 Simpan order awal
+    $order = Order::create([
+        'order_number'   => $orderNumber,
+        'customer_name'  => $request->customer_name,
+        'instrument'     => $request->instrument,
+        'status'         => 'Pending',
+        'received_date'  => now(),
+    ]);
+
+    // 🔵 Buat URL tracking
+    $qrURL = url('/tracking/' . $order->order_number);
+
+    // 🔵 Generate QR format base64
+    $qrImage = base64_encode(
+        QrCode::format('png')->size(300)->generate($qrURL)
+    );
+
+    // 🔵 Simpan QR ke database
+    $order->update([
+        'qr_code' => $qrImage
+    ]);
+
+    return redirect()->route('admin.orders.index')
+        ->with('success', 'Order created successfully with QR Code!');
+}
+
 
     // 🔵 DETAIL ORDER
     public function show($id)

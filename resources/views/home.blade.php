@@ -235,6 +235,42 @@
   </div>
 </section>
 
+<!-- Search Box -->
+        <div class="card shadow-lg border-0 p-4 mx-auto" style="max-width: 650px;">
+            <form action="{{ route('cek.alat') }}" method="POST">
+                @csrf
+
+                <div class="input-group input-group-lg">
+                    <input type="text" name="keyword" class="form-control"
+                        placeholder="Contoh: ORD-123456 atau PT Maju Jaya"
+                        required>
+
+                    <button class="btn btn-primary px-4">
+                        <i class="bi bi-search me-2"></i> Cari
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+    @if(session('order'))
+        @php $order = session('order'); @endphp
+
+        <div class="card mt-4 shadow">
+            <div class="card-body">
+                <h5>Status Order</h5>
+                <p><strong>Nomor Order:</strong> {{ $order->order_number }}</p>
+                <p><strong>Customer:</strong> {{ $order->customer_name }}</p>
+                <p><strong>Alat:</strong> {{ $order->instrument }}</p>
+                <p><strong>Status:</strong> <span class="badge bg-info text-dark">{{ $order->status }}</span></p>
+                <p><strong>Tanggal Diterima:</strong> {{ $order->received_date }}</p>
+                <p><strong>Tanggal Selesai:</strong> {{ $order->completed_date ?? '-' }}</p>
+                <p><strong>Teknisi:</strong> {{ $order->technician->name ?? 'Belum ditugaskan' }}</p>
+            </div>
+        </div>
+    @endif
+</div>
+
+
 <!-- Clients Section -->
 <section id="clients" class="py-5">
   <div class="container">
