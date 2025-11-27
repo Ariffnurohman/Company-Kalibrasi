@@ -59,6 +59,10 @@ Route::middleware(['auth', 'role:technician'])
     });
 
 
+Route::put('/technician/orders/{id}/update-status', 
+    [\App\Http\Controllers\Technician\OrderController::class, 'update']
+)->name('technician.orders.updateStatus')
+->middleware(['auth','role:technician']);
 
 
 // Form cek alat (landing page)

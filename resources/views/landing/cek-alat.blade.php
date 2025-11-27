@@ -1,4 +1,4 @@
-@extends('layouts.landing')
+@extends('layouts.cek-alat')
 
 @section('content')
 

@@ -25,5 +25,18 @@ class OrderController extends Controller
 
         return view('technician.orders.show', compact('order'));
     }
+
+     public function update(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string'
+        ]);
+
+        $order = Order::findOrFail($id);
+        $order->status = $request->status;
+        $order->save();
+
+        return back()->with('success', 'Status alat berhasil diperbarui!');
+    }
 }
 

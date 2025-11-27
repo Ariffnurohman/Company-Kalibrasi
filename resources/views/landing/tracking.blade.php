@@ -73,7 +73,7 @@
                 <div class="w-4 h-4 bg-yellow-500 rounded-full absolute -left-2 top-1"></div>
                 <p class="text-lg font-semibold">Proses Kalibrasi</p>
                 <p class="text-gray-600">
-                    {{ $order->processing_date ?? '— Belum diproses' }}
+                    {{ $order->completed_date ?? '— Belum selesai' }}
                 </p>
             </div>
 
