@@ -1,14 +1,26 @@
 @extends('layouts.app')
 
-
-
-<!-- Hero / Header -->
-<section class="service-hero text-white d-flex align-items-center justify-content-center">
-  <div class="text-center">
-    <h1 class="fw-bold">Layanan Kami</h1>
-    <p>Kami menyediakan jasa kalibrasi, pelatihan, dan perawatan alat ukur dengan standar internasional</p>
+<!-- Hero Section -->
+<div id="heroCarousel" class="carousel slide mt-6" data-aos="zoom-in" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{{ asset('images/banner/banner1.png') }}" class="d-block w-100 img-fluid" alt="Hero 1">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ asset('images/banner/banner2.png') }}" class="d-block w-100 img-fluid" alt="Hero 2">
+    </div>
+    <div class="carousel-item">
+      <img src="{{ asset('images/banner/banner3.png') }}" class="d-block w-100 img-fluid" alt="Hero 3">
+    </div>
   </div>
-</section>
+  <!-- Tombol navigasi -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
 
 <!-- Layanan Section -->
 <section id="services" class="py-5">
@@ -25,7 +37,7 @@
             <img src="{{ asset('images/icons/icon1.png') }}" alt="Kalibrasi" class="mb-3" width="70">
             <h5 class="card-title fw-bold">Kalibrasi Alat Ukur</h5>
             <p class="card-text">Kami melayani kalibrasi alat ukur dengan standar ISO 17025 untuk memastikan akurasi dan keandalan.</p>
-            <a href="#" class="btn btn-primary">Selengkapnya</a>
+            <a href="our-service" class="btn btn-primary">Selengkapnya</a>
           </div>
         </div>
       </div>

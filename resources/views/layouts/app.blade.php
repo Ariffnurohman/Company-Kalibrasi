@@ -27,7 +27,23 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 
 
+<style>
+    .service-card {
+    display: block;
+    padding: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    transition: 0.3s;
+    border: 1px solid #f1f1f1;
+}
 
+.service-card:hover {
+    transform: translateY(-5px);
+    background: #f8f9ff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+</style>
 
 </head>
 

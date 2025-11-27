@@ -86,6 +86,10 @@ Route::view('/contact', 'contact')->name('contact.index');
 // Contact Form
 Route::post('/contact', [ContactController::class, 'offer'])->name('contact.offer');
 
+Route::get('/our-service', function () {
+    return view('our-service');
+})->name('our.service');
+
 
 // Lingkup Kalibrasi
 Route::prefix('lingkup-kalibrasi')->group(function () {
