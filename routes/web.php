@@ -1,5 +1,8 @@
 <?php
 
+use BaconQrCode\Renderer\Image\Png;
+use BaconQrCode\Writer;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\VisitorController;
@@ -25,19 +28,21 @@ Route::middleware(['auth', 'role:admin'])
         Route::resource('orders', App\Http\Controllers\Admin\OrderController::class);
     });
 
-    Route::get('/tracking/{order_number}', [PublicController::class, 'tracking']);
+Route::get('/tracking/{order_number}', [PublicController::class, 'tracking']);
+
+
 
 Route::get('/download-qr/{order}', function ($order) {
 
-    $url = url('/tracking/'.$order);
+    $url = url('/tracking/' . $order);
 
-    $qr = QrCode::format('png')
+    $qr = QrCode::format('svg')
         ->size(300)
         ->generate($url);
 
     return response($qr)
         ->header('Content-Type', 'image/png')
-        ->header('Content-Disposition', 'attachment; filename="QR-'.$order.'.png"');
+        ->header('Content-Disposition', 'attachment; filename="QR-' . $order . '.png"');
 })->name('download.qr');
 
 /// ROUTE TEKNISI
@@ -46,24 +51,40 @@ Route::middleware(['auth', 'role:technician'])
     ->name('technician.')
     ->group(function () {
 
-        Route::get('/dashboard', 
+        Route::get(
+            '/dashboard',
             [\App\Http\Controllers\TechnicianDashboardController::class, 'index']
         )->name('dashboard');
 
-                Route::get('/orders', [\App\Http\Controllers\Technician\OrderController::class, 'index'])
-            ->name('orders.index');
+        // LIST ORDER
+        Route::get(
+            '/orders',
+            [\App\Http\Controllers\Technician\OrderController::class, 'index']
+        )->name('orders.index');
 
-        Route::get('/orders/{id}', [\App\Http\Controllers\Technician\OrderController::class, 'show'])
-            ->name('orders.show');
+        // DETAIL ORDER
+        Route::get(
+            '/orders/{id}',
+            [\App\Http\Controllers\Technician\OrderController::class, 'show']
+        )->name('orders.show');
 
+        // UPDATE STATUS (mulai, progress, selesai)
+        Route::put(
+            '/orders/{id}/update-status',
+            [\App\Http\Controllers\Technician\OrderController::class, 'updateStatus']
+        )->name('orders.updateStatus');
+
+        // FORM INPUT / UPLOAD DATA KALIBRASI
+        Route::get(
+            '/orders/{id}/workflow',
+            [\App\Http\Controllers\Technician\OrderController::class, 'workflow']
+        )->name('orders.workflow');
+
+        Route::post(
+            '/orders/{id}/workflow',
+            [\App\Http\Controllers\Technician\OrderController::class, 'storeWorkflow']
+        )->name('orders.workflow.store');
     });
-
-
-Route::put('/technician/orders/{id}/update-status', 
-    [\App\Http\Controllers\Technician\OrderController::class, 'update']
-)->name('technician.orders.updateStatus')
-->middleware(['auth','role:technician']);
-
 
 // Form cek alat (landing page)
 Route::get('/cek-alat', [\App\Http\Controllers\PublicController::class, 'cekAlat'])->name('cek.alat');
@@ -110,7 +131,7 @@ Route::view('/pelatihan', 'pelatihan.index')->name('pelatihan.index');
 
 
 // *** Route Auth dari Breeze ***
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 // Rahasia
@@ -120,4 +141,8 @@ Route::get('/force-logout', function () {
     session()->invalidate();
     session()->regenerateToken();
     return 'LOGOUT SUCCESS';
+});
+
+Route::get('/qr-test', function () {
+    return QrCode::format('svg')->size(200)->generate('Arif QR Test');
 });

@@ -67,6 +67,11 @@
 <a href="{{ route('technician.orders.index') }}" class="btn btn-secondary">
     Back to Orders
 </a>
+<a href="{{ route('technician.orders.workflow', $order->id) }}" 
+   class="btn btn-primary">
+   Mulai Workflow Kalibrasi
+</a>
+
 
 @if(session('success'))
 @endif

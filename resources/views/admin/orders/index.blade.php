@@ -41,6 +41,16 @@
             </thead>
 
             <tbody>
+                @php
+                $statusColor = [
+                'pending' => 'warning',
+                'processing' => 'info',
+                'completed' => 'success',
+                'calibration' => 'danger',
+                'waiting certificate' => 'primary',
+                ];
+                @endphp
+
                 @forelse ($orders as $order)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
@@ -48,8 +58,8 @@
                     <td>{{ $order->customer_name }}</td>
                     <td>{{ $order->instrument }}</td>
                     <td>
-                        <span class="badge status-{{ strtolower($order->status) }}">
-                            {{ $order->status }}
+                        <span class="badge bg-{{ $statusColor[strtolower($order->status)] ?? 'secondary' }}">
+                            {{ ucfirst($order->status) }}
                         </span>
                     </td>
                     <td>{{ $order->received_date }}</td>

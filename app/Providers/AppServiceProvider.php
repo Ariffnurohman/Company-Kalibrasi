@@ -6,6 +6,10 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\Visitor;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
+use SimpleSoftwareIO\QrCode\BaconQrCodeGenerator;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\Image\GdImageBackEnd;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +18,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+     // Paksa QR Code memakai GD (bukan imagick)
+     $this->app->bind('qrCode', function () {
+        return new BaconQrCodeGenerator(
+            new ImageRenderer(
+                new RendererStyle(300),
+                new GdImageBackEnd() // <-- Ini wajib!
+            )
+        );
+    });
     }
 
     /**

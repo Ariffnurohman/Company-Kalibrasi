@@ -45,7 +45,7 @@ class OrderController extends Controller
 
     // 🔵 Generate QR format base64
     $qrImage = base64_encode(
-        QrCode::format('png')->size(300)->generate($qrURL)
+        QrCode::format('svg')->size(300)->generate($qrURL)
     );
 
     // 🔵 Simpan QR ke database

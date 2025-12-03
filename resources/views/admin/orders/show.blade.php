@@ -24,10 +24,11 @@
                 @elseif($order->status == 'Calibration') bg-warning 
                 @elseif($order->status == 'Waiting Certificate') bg-primary 
                 @elseif($order->status == 'Completed') bg-success 
+                @else bg-dark
                 @endif
                 px-3 py-2 fs-6">
                 {{ $order->status }}
-            </span>
+            </span> 
         </div>
     </div>
 
@@ -78,6 +79,32 @@
 
                 </div>
             </div>
+            {{-- WORKFLOW TEKNISI --}}
+            <div class="card mt-4 shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Workflow Kalibrasi</h5>
+                </div>
+
+                <div class="card-body">
+                    @if(!$order->workflow_notes && !$order->workflow_file)
+                    <p class="text-muted">Belum ada workflow dari teknisi.</p>
+                    @else
+                    <p><strong>Catatan Teknisi:</strong></p>
+                    <div class="border p-3 bg-light rounded mb-3">
+                        {!! nl2br(e($order->workflow_notes)) !!}
+                    </div>
+
+                    @if ($order->workflow_file)
+                    <p><strong>File Workflow:</strong></p>
+                    <a href="{{ asset('storage/' . $order->workflow_file) }}"
+                        target="_blank"
+                        class="btn btn-outline-primary btn-sm">
+                        Lihat / Download File
+                    </a>
+                    @endif
+                    @endif
+                </div>
+            </div>
 
             <!-- Timeline -->
             <div class="card shadow-sm border-0 mb-4">
@@ -87,34 +114,34 @@
                 <div class="card-body">
 
                     @php
-                        $steps = [
-                            'Pending' => 'Order dibuat oleh admin / customer',
-                            'Processing' => 'Order sedang diproses',
-                            'Calibration' => 'Alat dalam proses kalibrasi',
-                            'Waiting Certificate' => 'Menunggu sertifikat kalibrasi',
-                            'Completed' => 'Order selesai'
-                        ];
+                    $steps = [
+                    'Pending' => 'Order dibuat oleh admin / customer',
+                    'Processing' => 'Order sedang diproses',
+                    'Calibration' => 'Alat dalam proses kalibrasi',
+                    'Waiting Certificate' => 'Menunggu sertifikat kalibrasi',
+                    'Completed' => 'Order selesai'
+                    ];
                     @endphp
 
                     <ul class="timeline list-unstyled">
                         @foreach($steps as $step => $desc)
-                            <li class="d-flex mb-4">
-                                <div class="me-3">
-                                    <span class="
+                        <li class="d-flex mb-4">
+                            <div class="me-3">
+                                <span class="
                                         @if(array_search($order->status, array_keys($steps)) >= array_search($step, array_keys($steps)))
                                             bg-primary
                                         @else
                                             bg-light border
                                         @endif
-                                        rounded-circle d-inline-block" 
-                                        style="width:18px; height:18px;">
-                                    </span>
-                                </div>
-                                <div>
-                                    <strong>{{ $step }}</strong>
-                                    <div class="text-muted small">{{ $desc }}</div>
-                                </div>
-                            </li>
+                                        rounded-circle d-inline-block"
+                                    style="width:18px; height:18px;">
+                                </span>
+                            </div>
+                            <div>
+                                <strong>{{ $step }}</strong>
+                                <div class="text-muted small">{{ $desc }}</div>
+                            </div>
+                        </li>
                         @endforeach
                     </ul>
 
@@ -122,6 +149,8 @@
             </div>
 
         </div>
+
+
 
         <!-- RIGHT COLUMN -->
         <div class="col-md-4">
@@ -133,12 +162,12 @@
                 </div>
                 <div class="card-body">
 
-                    <a href="{{ route('admin.orders.edit', $order->id) }}" 
+                    <a href="{{ route('admin.orders.edit', $order->id) }}"
                         class="btn btn-primary w-100 mb-2">
                         <i class="bi bi-pencil-square me-2"></i> Edit Order
                     </a>
 
-                    <form action="{{ route('admin.orders.destroy', $order->id) }}" 
+                    <form action="{{ route('admin.orders.destroy', $order->id) }}"
                         method="POST"
                         onsubmit="return confirm('Delete this order?')">
                         @csrf
@@ -163,16 +192,16 @@
                 </div>
                 <div class="card-body text-center">
 
-                    <img src="data:image/png;base64,{{ $order->qr_code }}" 
-                        alt="QR Code" 
+                    <img src="data:image/svg+xml;base64,{{ $order->qr_code }}"
+                        alt="QR Code"
                         class="img-fluid mb-3"
                         style="max-width: 220px;">
 
                     <small class="text-muted d-block mb-1">Scan untuk cek status</small>
 
-                    <a href="{{ url('/tracking/' . $order->order_number) }}" 
-                       target="_blank"
-                       class="btn btn-outline-primary btn-sm">
+                    <a href="{{ url('/tracking/' . $order->order_number) }}"
+                        target="_blank"
+                        class="btn btn-outline-primary btn-sm">
                         Lihat Halaman Tracking
                     </a>
 

@@ -3,127 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technician Panel</title>
+    <title>Technician Panel - {{ isset($title) ? $title : 'Dashboard' }}</title>
 
-    <!-- Bootstrap -->
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <style>
         body {
+            background-color: #f4f6f9;
             font-family: 'Inter', sans-serif;
-            background: #f5f7fb;
         }
 
-        /* Sidebar */
         .sidebar {
-            width: 260px;
-            background: #ffffff;
-            height: 100vh;
+            width: 250px;
+            min-height: 100vh;
+            background-color: white;
+            border-right: 1px solid #ddd;
             position: fixed;
-            border-right: 1px solid #e5e7eb;
             top: 0;
             left: 0;
-            padding: 20px 0;
-            transition: 0.3s;
-        }
-
-        .sidebar .brand {
-            font-size: 20px;
-            font-weight: bold;
-            text-align: center;
-            padding-bottom: 20px;
-            color: #111827;
+            padding-top: 20px;
         }
 
         .sidebar a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 20px;
-            color: #374151;
-            text-decoration: none;
-            font-size: 15px;
+            color: #333;
             font-weight: 500;
-            transition: 0.2s;
+            padding: 12px 20px;
+            display: block;
+            text-decoration: none;
+            border-radius: 6px;
+            margin: 4px 0;
         }
 
-        .sidebar a:hover {
-            background: #f3f4f6;
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #0d6efd;
+            color: white;
         }
 
-        .sidebar a.active {
-            background: #e5e7eb;
-            color: #111827;
-            font-weight: 600;
+        .content-area {
+            margin-left: 260px;
+            padding: 25px;
         }
 
-        /* TOPBAR */
         .topbar {
-            margin-left: 260px;
-            height: 60px;
-            background: #fff;
-            border-bottom: 1px solid #e5e7eb;
-            padding: 0 25px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .content {
-            margin-left: 260px;
-            padding: 30px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 25px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
+
 <body>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <div class="brand">
-            <i class="bi bi-tools"></i> Technician
-        </div>
+    {{-- SIDEBAR --}}
+    <div class="sidebar shadow-sm">
+        <h5 class="text-center fw-bold mb-4">Technician Panel</h5>
 
         <a href="{{ route('technician.dashboard') }}" 
-            class="{{ Request::is('technician/dashboard') ? 'active' : '' }}">
-            <i class="bi bi-speedometer2"></i> Dashboard
+           class="{{ request()->routeIs('technician.dashboard') ? 'active' : '' }}">
+            📊 Dashboard
         </a>
 
         <a href="{{ route('technician.orders.index') }}" 
-            class="{{ Request::is('technician/orders*') ? 'active' : '' }}">
-            <i class="bi bi-clipboard-check"></i> Orders
+           class="{{ request()->routeIs('technician.orders.*') ? 'active' : '' }}">
+            📦 Orders
         </a>
 
-
-        <a href="{{ route('logout') }}"
-            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <i class="bi bi-box-arrow-right"></i> Logout
+        <a href="{{ route('logout') }}" 
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            🚪 Logout
         </a>
 
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
             @csrf
         </form>
     </div>
 
-    <!-- TOPBAR -->
-    <div class="topbar">
-        <h6 class="fw-semibold mb-0">Technician Dashboard</h6>
+    {{-- CONTENT --}}
+    <div class="content-area">
 
-        <div class="d-flex align-items-center gap-2">
-            <i class="bi bi-person-circle fs-5"></i>
-            <span class="fw-semibold">
-                {{ Auth::user()->name }}
-            </span>
+        {{-- TOP BAR --}}
+        <div class="topbar d-flex justify-content-between align-items-center">
+            <h4 class="fw-bold m-0">{{ $title ?? 'Technician Area' }}</h4>
+            <span class="text-muted">Logged in as: {{ Auth::user()->name }}</span>
         </div>
+
+        {{-- ALERT GLOBAL --}}
+        @if(session('success'))
+            <div class="alert alert-success shadow-sm">
+                <strong>Success:</strong> {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger shadow-sm">
+                <strong>Error:</strong> {{ session('error') }}
+            </div>
+        @endif
+
+        {{-- PAGE CONTENT --}}
+        <div>
+            @yield('content')
+        </div>
+
     </div>
 
-    <!-- CONTENT -->
-    <div class="content">
-        @yield('content')
-    </div>
-
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

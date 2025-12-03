@@ -21,9 +21,12 @@ class Order extends Model
     ];
 
     public function technician()
-{
-    return $this->belongsTo(User::class, 'technician_id');
-}
+    {
+        return $this->belongsTo(User::class, 'technician_id');
+    }
 
+    public function calibrationResult()
+    {
+        return $this->hasOne(CalibrationResult::class);
+    }
 }
-

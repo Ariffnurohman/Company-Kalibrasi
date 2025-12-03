@@ -35,11 +35,6 @@
 
     <button type="submit" class="btn btn-primary w-100 py-2">Login</button>
 
-    @if (Route::has('register'))
-        <div class="text-center mt-3 small">
-            Belum punya akun? <a href="{{ route('register') }}">Register</a>
-        </div>
-    @endif
 </form>
 
 </x-guest-layout>

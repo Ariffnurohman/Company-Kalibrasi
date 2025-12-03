@@ -51,4 +51,11 @@ class User extends Authenticatable
 {
     return $this->hasMany(Order::class, 'technician_id');
 }
+
+public function calibrationResults()
+{
+    return $this->hasMany(CalibrationResult::class, 'technician_id');
+}
+
+
 }
