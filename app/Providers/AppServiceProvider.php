@@ -18,48 +18,51 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-     // Paksa QR Code memakai GD (bukan imagick)
-     $this->app->bind('qrCode', function () {
-        return new BaconQrCodeGenerator(
-            new ImageRenderer(
-                new RendererStyle(300),
-                new GdImageBackEnd() // <-- Ini wajib!
-            )
-        );
-    });
+        // Paksa QR Code memakai GD (bukan imagick)
+        $this->app->bind('qrCode', function () {
+            return new BaconQrCodeGenerator(
+                new ImageRenderer(
+                    new RendererStyle(300),
+                    new GdImageBackEnd() // <-- Ini wajib!
+                )
+            );
+        });
     }
 
     /**
      * Bootstrap any application services.
      */
-   public function boot(): void
-{
-    $now = Carbon::now();
+    public function boot(): void
+    {
+        $now = Carbon::now();
 
-    // Total pengunjung (IP unik)
-    $totalVisitors = Visitor::distinct('ip_address')->count('ip_address');
+        // Total pengunjung (IP unik)
+        $totalVisitors = Visitor::distinct('ip_address')->count('ip_address');
 
-    // Pengunjung online (aktif 5 menit terakhir)
-    $onlineVisitors = Visitor::where('last_activity', '>=', $now->copy()->subMinutes(5))->count();
+        // Pengunjung online (aktif 5 menit terakhir)
+        $onlineVisitors = Visitor::where('last_activity', '>=', $now->copy()->subMinutes(5))->count();
 
-    // Pengunjung hari ini
-    $visitorsToday = Visitor::whereDate('last_activity', $now->toDateString())
-                            ->distinct('ip_address')
-                            ->count('ip_address');
+        // Pengunjung hari ini
+        $visitorsToday = Visitor::whereDate('last_activity', $now->toDateString())
+            ->distinct('ip_address')
+            ->count('ip_address');
 
-    // Total penayangan (total semua record di tabel visitors)
-    $totalViews = Visitor::count();
+        view()->composer('layouts.admin', function ($view) {
+            $view->with('notifications', auth()->check() ? auth()->user()->unreadNotifications : collect());
+        });
+        // Total penayangan (total semua record di tabel visitors)
+        $totalViews = Visitor::count();
 
-    // Penayangan hari ini
-    $viewsToday = Visitor::whereDate('last_activity', $now->toDateString())->count();
+        // Penayangan hari ini
+        $viewsToday = Visitor::whereDate('last_activity', $now->toDateString())->count();
 
-    // Bagikan ke semua view
-    View::share([
-        'totalVisitors' => $totalVisitors,
-        'totalViews' => $totalViews,
-        'onlineVisitors' => $onlineVisitors,
-        'visitorsToday' => $visitorsToday,
-        'viewsToday' => $viewsToday,
-    ]);
-}
+        // Bagikan ke semua view
+        View::share([
+            'totalVisitors' => $totalVisitors,
+            'totalViews' => $totalViews,
+            'onlineVisitors' => $onlineVisitors,
+            'visitorsToday' => $visitorsToday,
+            'viewsToday' => $viewsToday,
+        ]);
+    }
 }

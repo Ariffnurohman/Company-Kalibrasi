@@ -33,7 +33,6 @@
         </div>
     </div>
 
-
     <!-- ===================== RECENT ORDERS TABLE ===================== -->
     <div class="card shadow-sm mt-5 p-4 border-0 rounded-4">
         <h6 class="fw-bold mb-3">Recent Orders</h6>
@@ -76,9 +75,8 @@
     </div>
 
 </div>
-
+ 
 @endsection
-
 
 
 @section('scripts')

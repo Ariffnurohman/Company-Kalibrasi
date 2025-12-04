@@ -7,6 +7,13 @@
         <li><a href="/admin/dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
         <li><a href="/admin/orders"><i class="bi bi-bag"></i> Orders</a></li>
         <li><a href="/admin/customers"><i class="bi bi-people"></i> Customers</a></li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.pickups.index') }}">
+                <i class="bi bi-box-arrow-in-down"></i>
+                <span>Pengambilan Alat</span>
+            </a>
+        </li>
+
         <li><a href="/admin/settings"><i class="bi bi-gear"></i> Settings</a></li>
     </ul>
 </div>

@@ -38,6 +38,10 @@ public function store(LoginRequest $request): RedirectResponse
         return redirect()->route('technician.dashboard');
     }
 
+    if ($user->role === 'sales') {
+        return redirect()->route('sales.scheduling.index');
+    }
+
     // default jika role lain
     return redirect('/home');
 }
