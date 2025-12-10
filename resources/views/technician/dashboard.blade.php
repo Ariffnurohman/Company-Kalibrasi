@@ -2,63 +2,87 @@
 
 @section('content')
 
-<div class="row g-3">
+{{-- Statistik Section --}}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-    <div class="col-md-4">
-        <div class="card p-3 shadow-sm border-0">
-            <h6 class="text-muted">Assigned Orders</h6>
-            <h2 class="fw-bold">{{ $assignedOrders }}</h2>
-        </div>
+    <div class="bg-white p-5 rounded-xl shadow-sm border">
+        <p class="text-gray-500 text-sm">Assigned Orders</p>
+        <p class="text-3xl font-bold mt-1">{{ $assignedOrders }}</p>
     </div>
 
-    <div class="col-md-4">
-        <div class="card p-3 shadow-sm border-0">
-            <h6 class="text-muted">In Progress</h6>
-            <h2 class="fw-bold text-primary">{{ $inProgress }}</h2>
-        </div>
+    <div class="bg-white p-5 rounded-xl shadow-sm border">
+        <p class="text-gray-500 text-sm">In Progress</p>
+        <p class="text-3xl font-bold text-blue-600 mt-1">{{ $inProgress }}</p>
     </div>
 
-    <div class="col-md-4">
-        <div class="card p-3 shadow-sm border-0">
-            <h6 class="text-muted">Completed</h6>
-            <h2 class="fw-bold text-success">{{ $completed }}</h2>
-        </div>
+    <div class="bg-white p-5 rounded-xl shadow-sm border">
+        <p class="text-gray-500 text-sm">Completed</p>
+        <p class="text-3xl font-bold text-green-600 mt-1">{{ $completed }}</p>
     </div>
+
 </div>
 
-<div class="card mt-4 shadow-sm border-0">
-    <div class="card-header bg-base-100 rounded-xl shadow p-4">Recent Orders</div>
 
-    <div class="table-responsive p-3">
-        <table class="table table-bordered">
-            <thead>
+{{-- Recent Orders Section --}}
+<div class="bg-white rounded-xl shadow-sm border mt-6">
+
+    <div class="p-4 border-b flex items-center justify-between">
+        <h2 class="text-lg font-semibold">Recent Orders</h2>
+
+        {{-- Search Filter --}}
+        <form method="GET" class="w-52">
+            <input 
+                type="text" 
+                name="search" 
+                value="{{ request('search') }}"
+                placeholder="Search orders..."
+                class="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            >
+        </form>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+            <thead class="bg-gray-100">
                 <tr>
-                    <th>Order</th>
-                    <th>Instrument</th>
-                    <th>Status</th>
-                    <th>Updated</th>
+                    <th class="px-4 py-2 text-left">Order</th>
+                    <th class="px-4 py-2 text-left">Instrument</th>
+                    <th class="px-4 py-2 text-left">Status</th>
+                    <th class="px-4 py-2 text-left">Updated</th>
                 </tr>
             </thead>
+
             <tbody>
-                @foreach($recentOrders as $o)
-                <tr>
-                    <td>{{ $o->order_number }}</td>
-                    <td>{{ $o->instrument }}</td>
-                    <td>
-                        <span class="badge bg-{{ 
-                            $o->status == 'Completed' ? 'success' : 
-                            ($o->status == 'Calibration' ? 'warning' : 
-                            ($o->status == 'Processing' ? 'primary' : 'secondary'))
-                        }}">
+                @forelse ($recentOrders as $o)
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="px-4 py-2 font-medium">{{ $o->order_number }}</td>
+                    <td class="px-4 py-2">{{ $o->instrument }}</td>
+                    <td class="px-4 py-2">
+                        @php
+                            $color = match($o->status) {
+                                'Completed' => 'bg-green-100 text-green-700',
+                                'Calibration' => 'bg-yellow-100 text-yellow-700',
+                                'Processing' => 'bg-blue-100 text-blue-700',
+                                default => 'bg-gray-100 text-gray-700',
+                            };
+                        @endphp
+
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $color }}">
                             {{ $o->status }}
                         </span>
                     </td>
-                    <td>{{ $o->updated_at->diffForHumans() }}</td>
+                    <td class="px-4 py-2">{{ $o->updated_at->diffForHumans() }}</td>
                 </tr>
-                @endforeach
+
+                @empty
+                <tr>
+                    <td colspan="4" class="px-4 py-5 text-center text-gray-500">No orders found.</td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
+
 </div>
 
 @endsection

@@ -1,62 +1,58 @@
 @extends('layouts.technician')
 
 @section('content')
+<div class="bg-white p-6 rounded-lg shadow">
 
-<div class="bg-base-100 rounded-xl shadow p-4">
-
-    {{-- Header --}}
-    <div class="border-b pb-3 mb-4">
-        <h2 class="text-xl font-bold">Technician Orders</h2>
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Daftar Order</h2>
     </div>
 
-    {{-- Table --}}
-    <div class="overflow-x-auto">
-        <table class="table table-zebra w-full">
-            <thead>
-                <tr class="text-sm text-gray-300">
-                    <th>Order Number</th>
-                    <th>Instrument</th>
-                    <th>Status</th>
-                    <th>Updated At</th>
-                    <th>Action</th>
+    <div class="overflow-x-auto mt-4">
+        <table class="w-full border border-gray-300 rounded-lg">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-4 py-2 border">No</th>
+                    <th class="px-4 py-2 border">Order Number</th>
+                    <th class="px-4 py-2 border">Customer</th>
+                    <th class="px-4 py-2 border">Status</th>
+                    <th class="px-4 py-2 border">Aksi</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach ($orders as $o)
-                <tr>
-                    <td>{{ $o->order_number }}</td>
-                    <td>{{ $o->instrument }}</td>
-                    <td>
-                        <span class="badge 
-                            @if($o->status=='Completed') badge-success
-                            @elseif($o->status=='Calibration') badge-warning
-                            @elseif($o->status=='Processing') badge-info
-                            @else badge-neutral
-                            @endif
+                @forelse ($orders as $index => $order)
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2 border">{{ $index + 1 }}</td>
+                    <td class="px-4 py-2 border">{{ $order->order_number }}</td>
+                    <td class="px-4 py-2 border">{{ $order->customer_name }}</td>
+                    <td class="px-4 py-2 border">
+                        <span class="
+                            px-3 py-1 rounded-full text-white text-sm
+                            {{ $order->status == 'pending' ? 'bg-yellow-500' : '' }}
+                            {{ $order->status == 'proses' ? 'bg-blue-500' : '' }}
+                            {{ $order->status == 'selesai' ? 'bg-green-600' : '' }}
                         ">
-                            {{ $o->status }}
+                            {{ ucfirst($order->status) }}
                         </span>
                     </td>
-                    <td>{{ $o->updated_at->diffForHumans() }}</td>
-                    <td>
-                        <a href="{{ route('technician.orders.show', $o->id) }}"
-                           class="btn btn-sm btn-primary">
-                            <i class="bi bi-eye"></i> View
+
+                    <td class="px-4 py-2 border">
+                        <a href="{{ route('technician.orders.show', $order->id) }}"
+                           class="px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                           Detail
                         </a>
                     </td>
                 </tr>
-                @endforeach
+
+                @empty
+                <tr>
+                    <td colspan="5" class="text-center py-4 text-gray-500">
+                        Tidak ada data order.
+                    </td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
-
-        {{-- Pagination --}}
-        <div class="mt-4">
-            {{ $orders->links() }}
-        </div>
-
     </div>
-
 </div>
-
 @endsection

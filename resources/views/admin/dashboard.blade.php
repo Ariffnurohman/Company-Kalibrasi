@@ -1,119 +1,100 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-fluid py-4">
+<div class="max-w-7xl mx-auto py-6">
 
-    <h3 class="fw-bold mb-4">Admin Dashboard</h3>
+    {{-- PAGE TITLE --}}
+    <h3 class="text-2xl font-bold mb-6">Admin Dashboard</h3>
 
-    <!-- ===================== SUMMARY CARDS ===================== -->
-    <div class="row g-4">
-        <div class="col-md-3">
-            <div class="card shadow-sm p-3 border-0 rounded-4" style="background:#4e73df; color:white;">
-                <h6>Total Orders</h6>
-                <h2 class="fw-bold">{{ $totalOrders }}</h2>
-                <i class="bi bi-bag-check-fill fs-1 opacity-50 position-absolute end-0 bottom-0 me-3 mb-3"></i>
+
+    {{-- ================= SUMMARY CARDS ================= --}}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+        {{-- Total Orders --}}
+        <div class="relative bg-indigo-600 text-white p-6 rounded-2xl shadow">
+            <h6 class="text-sm opacity-90">Total Orders</h6>
+            <h2 class="text-4xl font-bold mt-1">{{ $totalOrders }}</h2>
+
+            <div class="absolute right-4 bottom-4 opacity-40">
+                <x-heroicon-o-clipboard-document-check class="w-12 h-12" />
             </div>
         </div>
 
+        {{-- Completed Orders --}}
+        <div class="relative bg-cyan-500 text-white p-6 rounded-2xl shadow">
+            <h6 class="text-sm opacity-90">Completed Orders</h6>
+            <h2 class="text-4xl font-bold mt-1">{{ $completedOrders }}</h2>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm p-3 border-0 rounded-4" style="background:#36b9cc; color:white;">
-                <h6>Completed Orders</h6>
-                <h2 class="fw-bold">{{ $completedOrders }}</h2>
-                <i class="bi bi-check2-circle fs-1 opacity-50 position-absolute end-0 bottom-0 me-3 mb-3"></i>
+            <div class="absolute right-4 bottom-4 opacity-40">
+                <x-heroicon-o-check-circle class="w-12 h-12" />
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card shadow-sm p-3 border-0 rounded-4" style="background:#f6c23e; color:white;">
-                <h6>Pending Orders</h6>
-                <h2 class="fw-bold">{{ $pendingOrders }}</h2>
-                <i class="bi bi-hourglass-top fs-1 opacity-50 position-absolute end-0 bottom-0 me-3 mb-3"></i>
+        {{-- Pending Orders --}}
+        <div class="relative bg-yellow-500 text-white p-6 rounded-2xl shadow">
+            <h6 class="text-sm opacity-90">Pending Orders</h6>
+            <h2 class="text-4xl font-bold mt-1">{{ $pendingOrders }}</h2>
+
+            <div class="absolute right-4 bottom-4 opacity-40">
+                <x-heroicon-o-clock class="w-12 h-12" />
             </div>
         </div>
+
     </div>
 
-    <!-- ===================== RECENT ORDERS TABLE ===================== -->
-    <div class="card shadow-sm mt-5 p-4 border-0 rounded-4">
-        <h6 class="fw-bold mb-3">Recent Orders</h6>
 
-        <table class="table table-hover align-middle">
-            <thead class="table-light">
-                <tr>
-                    <th>#</th>
-                    <th>Customer</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
+    {{-- ================= RECENT ORDERS TABLE ================= --}}
+    <div class="bg-white shadow rounded-2xl p-6 mt-8">
+        <h6 class="text-lg font-bold mb-4">Recent Orders</h6>
 
-            <tbody>
-            @php
-                $statusColor = [
-                'pending' => 'warning',
-                'processing' => 'info',
-                'completed' => 'success',
-                'calibration' => 'danger',
-                'waiting certificate' => 'primary',
-                ];
-                @endphp
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="bg-gray-100 text-gray-600 text-left text-xs uppercase">
+                        <th class="py-3 px-4">#</th>
+                        <th class="py-3 px-4">Customer</th>
+                        <th class="py-3 px-4">Status</th>
+                        <th class="py-3 px-4">Date</th>
+                    </tr>
+                </thead>
 
-                @foreach ($recentOrders as $order)
-                <tr>
-                    <td>{{ $order->id }}</td>
-                    <td>{{ $order->customer_name }}</td>
-                    <td>
-                        <span class="badge bg-{{ $statusColor[strtolower($order->status)] ?? 'secondary' }}">
-                            {{ ucfirst($order->status) }}
-                        </span>
-                    </td>
-                    <td>{{ $order->created_at->format('d M Y') }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                <tbody class="divide-y">
+
+                    @php
+                        $statusColor = [
+                            'pending' => 'bg-yellow-200 text-yellow-800',
+                            'processing' => 'bg-blue-200 text-blue-800',
+                            'completed' => 'bg-green-200 text-green-800',
+                            'calibration' => 'bg-red-200 text-red-800',
+                            'waiting certificate' => 'bg-indigo-200 text-indigo-800',
+                        ];
+                    @endphp
+
+                    @foreach ($recentOrders as $order)
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">{{ $order->id }}</td>
+
+                            <td class="py-3 px-4">
+                                {{ $order->customer_name }}
+                            </td>
+
+                            <td class="py-3 px-4">
+                                <span class="px-3 py-1 text-xs rounded-full font-semibold 
+                                {{ $statusColor[strtolower($order->status)] ?? 'bg-gray-200 text-gray-800' }}">
+                                    {{ ucfirst($order->status) }}
+                                </span>
+                            </td>
+
+                            <td class="py-3 px-4">
+                                {{ $order->created_at->format('d M Y') }}
+                            </td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>
- 
-@endsection
-
-
-@section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-    // ====== DATA PHP → JS ======
-    const months      = @json($months);
-    const ordersData  = @json($ordersChart);
-    const revenueData = @json($revenueChart);
-
-    // ====== ORDERS CHART ======
-    new Chart(document.getElementById("ordersChart"), {
-        type: "line",
-        data: {
-            labels: months,
-            datasets: [{
-                label: "Orders",
-                data: ordersData,
-                fill: true,
-                borderWidth: 3,
-            }]
-        }
-    });
-
-    // ====== REVENUE CHART ======
-    new Chart(document.getElementById("revenueChart"), {
-        type: "bar",
-        data: {
-            labels: months,
-            datasets: [{
-                label: "Revenue",
-                data: revenueData,
-                borderWidth: 1
-            }]
-        }
-    });
-</script>
-
 @endsection
