@@ -2,29 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-
-/* Global Input Style (mate-input) */
-.mate-input {
-    @apply w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-50 text-gray-800
-           focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition;
+/* ================================
+   GLOBAL BASE STYLE
+=================================== */
+@layer base {
+  body {
+    @apply bg-base-200 text-base-content;
+  }
 }
 
-/* Untuk select */
-.mate-select {
-    @apply w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-50 text-gray-800
-           focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition;
-}
-
-/* Label */
-.mate-label {
-    @apply block text-gray-700 font-semibold mb-1;
-}
-
-/* Buttons */
+/* ================================
+   BUTTONS
+=================================== */
 .mate-btn-primary {
-    @apply px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold shadow hover:bg-blue-700 transition;
+  @apply px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold shadow 
+         hover:bg-blue-700 transition;
 }
 
 .mate-btn-secondary {
-    @apply px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold shadow hover:bg-gray-300 transition;
+  @apply px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold shadow 
+         hover:bg-gray-300 transition;
+}
+
+/* ================================
+   LABEL (STATIC LABEL BIASA)
+=================================== */
+.mate-label {
+  @apply block font-semibold mb-1 text-base-content opacity-80;
+}
+
+/* ================================
+   FORM INPUT (DEFAULT INPUT)
+=================================== */
+.mate-input,
+.mate-select {
+  @apply w-full px-4 py-2 rounded-lg border bg-base-300 border-base-100 text-base-content
+         focus:ring-2 focus:ring-primary focus:border-primary transition;
+}
+
+/* ================================
+   FLOATING LABEL FORM GROUP
+=================================== */
+.form-group {
+  @apply relative mt-4;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  @apply w-full px-4 py-2 rounded-lg bg-base-300 border border-base-100 text-base-content 
+         transition outline-none;
+}
+
+/* Fokus */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  @apply ring-2 ring-primary border-primary bg-base-200;
+}
+
+/* Placeholder hilang agar floating label aktif */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  opacity: 0;
+}
+
+/* Label */
+.form-group label {
+  @apply absolute left-3 top-3 text-base-content opacity-60 transition-all pointer-events-none;
+}
+
+/* Floating active */
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group select:focus + label,
+.form-group select:not([value=""]) + label,
+.form-group textarea:focus + label,
+.form-group textarea:not(:placeholder-shown) + label {
+  @apply text-xs -top-3 left-2 bg-base-200 px-1 rounded;
 }

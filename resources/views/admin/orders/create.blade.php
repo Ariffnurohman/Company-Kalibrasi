@@ -1,64 +1,73 @@
-@extends('layouts.create')
+@extends('layouts.admin')
 
-@section('title', 'Create Order')
+@section('content')
+<div class="max-w-4xl mx-auto bg-white rounded-xl shadow p-8 space-y-8">
 
-@section('form')
+    {{-- TITLE --}}
+    <h2 class="text-2xl font-bold text-gray-800">Create New Order</h2>
 
-<form action="{{ route('admin.orders.store') }}" method="POST">
-    @csrf
+    <form action="{{ route('admin.orders.store') }}" method="POST" class="space-y-6">
+        @csrf
 
-    {{-- Grid 1 --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {{-- GRID 1 --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="label-text font-semibold">Customer Name</span>
+                </label>
+                <input type="text" name="customer_name" placeholder="Enter customer name" required
+                    class="input input-bordered w-full" />
+            </div>
 
-        <div class="form-group">
-            <input type="text" name="customer_name" placeholder=" " required>
-            <label>Customer Name</label>
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="label-text font-semibold">Instrument</span>
+                </label>
+                <input type="text" name="instrument" placeholder="Enter instrument" required
+                    class="input input-bordered w-full" />
+            </div>
         </div>
 
-        <div class="form-group">
-            <input type="text" name="instrument" placeholder=" " required>
-            <label>Instrument</label>
+        {{-- GRID 2 --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="label-text font-semibold">Status</span>
+                </label>
+                <select name="status" required class="select select-bordered w-full">
+                    <option value="">Select status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="On Progress">On Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="label-text font-semibold">Received Date</span>
+                </label>
+                <input type="date" name="received_date" value="{{ date('Y-m-d') }}"
+                    class="input input-bordered w-full" />
+            </div>
         </div>
 
-    </div>
-
-    {{-- Grid 2 --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-
-        <div class="form-group">
-            <select name="status" placeholder=" " required>
-                <option value="" disabled selected></option>
-                <option value="Pending">Pending</option>
-                <option value="On Progress">On Progress</option>
-                <option value="Completed">Completed</option>
-            </select>
-            <label>Status</label>
+        {{-- NOTES --}}
+        <div class="form-control w-full">
+            <label class="label">
+                <span class="label-text font-semibold">Notes (optional)</span>
+            </label>
+            <textarea name="notes" rows="4" placeholder="Enter notes..." class="textarea textarea-bordered w-full"></textarea>
         </div>
 
-        <div class="form-group">
-            <input type="date" name="received_date" placeholder=" " value="{{ date('Y-m-d') }}">
-            <label>Received Date</label>
+        {{-- BUTTONS --}}
+        <div class="flex justify-end gap-4">
+            <a href="{{ route('admin.orders.index') }}" class="btn btn-outline">
+                Cancel
+            </a>
+            <button type="submit" class="btn btn-primary">
+                Create Order
+            </button>
         </div>
-
-    </div>
-
-    {{-- Notes --}}
-    <div class="mt-6 form-group">
-        <textarea name="notes" placeholder=" "></textarea>
-        <label>Notes (optional)</label>
-    </div>
-
-    {{-- Buttons --}}
-    <div class="flex justify-end gap-4 mt-8">
-        <a href="{{ route('admin.orders.index') }}" class="mate-btn-secondary">
-            Cancel
-        </a>
-
-        <button type="submit" class="mate-btn-primary">
-            Create Order
-        </button>
-    </div>
-
-</form>
-
+    </form>
+</div>
 @endsection

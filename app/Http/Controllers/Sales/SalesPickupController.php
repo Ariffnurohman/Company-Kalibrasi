@@ -3,42 +3,49 @@
 namespace App\Http\Controllers\Sales;
 
 use App\Http\Controllers\Controller;
-use App\Models\SalesPickup;
+use App\Models\Pickup;
+use App\Models\Order;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Notifications\SalesPickupRequest;
-use App\Models\User;
 
 class SalesPickupController extends Controller
 {
     public function create()
     {
-        return view('sales.pickup.create'); // buat file blade untuk form pickup
+        // Ambil semua order yang pending
+        // atau sesuai filter yang kamu butuhkan
+        $orders = Order::where('status', 'Pending')->get();
+
+        return view('sales.pickup.create', compact('orders'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'customer' => 'required|string',
-            'equipment' => 'required|string',
+            'order_id' => 'required',
             'pickup_date' => 'required|date',
+            'notes' => 'nullable|string',
         ]);
-    
-        // Simpan request pengambilan
-        $pickup = \App\Models\SalesPickup::create([
+
+        Pickup::create([
+            'order_id' => $request->order_id,
             'sales_id' => auth()->id(),
-            'customer' => $request->customer,
-            'equipment' => $request->equipment,
             'pickup_date' => $request->pickup_date,
+            'notes' => $request->notes,
             'status' => 'pending',
         ]);
-    
-        // Kirim notifikasi ke semua admin
-        $admins = User::where('role', 'admin')->get();
-        foreach ($admins as $admin) {
-            $admin->notify(new SalesPickupRequest($pickup));
-        }
-    
-        return back()->with('success', 'Request pengambilan alat berhasil dikirim.');
+
+        return redirect()->route('sales.pickup.history')
+            ->with('success', 'Pickup berhasil dibuat.');
+    }
+
+    public function history()
+    {
+        // Ambil hanya pickup milik sales login
+        $pickups = Pickup::where('sales_id', auth()->id())
+            ->whereIn('status', ['completed', 'cancelled', 'done']) // sesuaikan statusmu
+            ->latest()
+            ->get();
+
+        return view('sales.pickup.history', compact('pickups'));
     }
 }

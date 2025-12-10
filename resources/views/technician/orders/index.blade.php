@@ -2,15 +2,18 @@
 
 @section('content')
 
-<div class="card shadow-sm border-0">
-    <div class="card-header bg-white fw-bold">
-        Technician Orders
+<div class="bg-base-100 rounded-xl shadow p-4">
+
+    {{-- Header --}}
+    <div class="border-b pb-3 mb-4">
+        <h2 class="text-xl font-bold">Technician Orders</h2>
     </div>
 
-    <div class="table-responsive p-3">
-        <table class="table table-bordered align-middle">
+    {{-- Table --}}
+    <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
             <thead>
-                <tr>
+                <tr class="text-sm text-gray-300">
                     <th>Order Number</th>
                     <th>Instrument</th>
                     <th>Status</th>
@@ -18,17 +21,20 @@
                     <th>Action</th>
                 </tr>
             </thead>
+
             <tbody>
                 @foreach ($orders as $o)
                 <tr>
                     <td>{{ $o->order_number }}</td>
                     <td>{{ $o->instrument }}</td>
                     <td>
-                        <span class="badge bg-{{
-                            $o->status == 'Completed' ? 'success' :
-                            ($o->status == 'Calibration' ? 'warning' :
-                            ($o->status == 'Processing' ? 'primary' : 'secondary'))
-                        }}">
+                        <span class="badge 
+                            @if($o->status=='Completed') badge-success
+                            @elseif($o->status=='Calibration') badge-warning
+                            @elseif($o->status=='Processing') badge-info
+                            @else badge-neutral
+                            @endif
+                        ">
                             {{ $o->status }}
                         </span>
                     </td>
@@ -44,10 +50,13 @@
             </tbody>
         </table>
 
-        <div class="mt-3">
+        {{-- Pagination --}}
+        <div class="mt-4">
             {{ $orders->links() }}
         </div>
+
     </div>
+
 </div>
 
 @endsection

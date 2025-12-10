@@ -17,7 +17,7 @@ class Order extends Model
         'received_date',
         'completed_date',
         'technician_id',
-        'qr_code', // <--- tambahkan ini
+        'qr_code',
     ];
 
     public function technician()
@@ -28,5 +28,10 @@ class Order extends Model
     public function calibrationResult()
     {
         return $this->hasOne(CalibrationResult::class);
+    }
+
+    public function pickups()
+    {
+        return $this->hasMany(Pickup::class);
     }
 }

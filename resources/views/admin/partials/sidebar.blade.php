@@ -12,7 +12,7 @@
                 <i class="bi bi-box-arrow-in-down"></i>
                 <span>Pengambilan Alat</span>
             </a>
-        </li>
+        </li>   
 
         <li><a href="/admin/settings"><i class="bi bi-gear"></i> Settings</a></li>
     </ul>

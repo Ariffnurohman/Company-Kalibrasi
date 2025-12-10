@@ -10,9 +10,10 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\AdminPickupController;
 
 // SALES
-use App\Http\Controllers\SalesDashboardController;
+use App\Http\Controllers\Sales\SalesDashboardController;
 use App\Http\Controllers\Sales\SalesPickupController;
-use App\Http\Controllers\Sales\SalesScheduleController;
+use App\Http\Controllers\Sales\PickupController;
+use App\Http\Controllers\Sales\SalesOrderController;
 
 // TECHNICIAN
 use App\Http\Controllers\TechnicianDashboardController;
@@ -72,35 +73,74 @@ Route::middleware(['auth', 'role:admin'])
         // CRUD ORDER
         Route::resource('orders', AdminOrderController::class);
 
-        // PICKUP ALAT (Admin)
-        Route::get('/pickups', [AdminPickupController::class, 'index'])->name('pickups.index');
+        // ============================
+        //   PICKUP ALAT (ADMIN)
+        // ============================
+        Route::prefix('pickups')->name('pickups.')->group(function () {
 
-        // Approve pengambilan alat
-        Route::post('/pickups/{id}/approve', [AdminPickupController::class, 'approve'])
-            ->name('pickup.approve');
+            // Halaman daftar pickup
+            Route::get('/', [AdminPickupController::class, 'index'])->name('index');
 
-        Route::post('/pickups/{id}/reject', [App\Http\Controllers\Admin\AdminPickupController::class, 'reject'])
-            ->name('pickup.reject');
+            // Approve & Reject
+            Route::post('/{id}/approve', [AdminPickupController::class, 'approve'])->name('approve');
+            Route::post('/{id}/reject', [AdminPickupController::class, 'reject'])->name('reject');
+
+            // Riwayat pickup
+        });
     });
 
 
 // ===========================
 // SALES ROUTES
-// ===========================
 Route::middleware(['auth', 'role:sales'])
     ->prefix('sales')
     ->name('sales.')
     ->group(function () {
 
-        Route::get('/dashboard', [SalesDashboardController::class, 'index'])->name('dashboard');
+        // 🟦 Dashboard
+        Route::get('/dashboard', [SalesDashboardController::class, 'index'])
+            ->name('dashboard');
 
-        // Pickup alat
-        Route::get('/pickup', [SalesPickupController::class, 'create'])->name('pickup.create');
-        Route::post('/pickup', [SalesPickupController::class, 'store'])->name('pickup.store');
+        // 🟦 Orders untuk Sales
+        Route::get('/orders', [SalesOrderController::class, 'index'])
+            ->name('orders.index');
 
-        // Scheduling
-        Route::get('/scheduling', [SalesScheduleController::class, 'index'])->name('scheduling.index');
-        Route::post('/scheduling/store', [SalesScheduleController::class, 'store'])->name('scheduling.store');
+        Route::get('/orders/{order}', [SalesOrderController::class, 'show'])
+            ->name('orders.show');
+
+
+        // 🟦 PICKUPS (Complete CRUD + History)
+        Route::controller(SalesPickupController::class)->group(function () {
+
+            // List semua pickup milik sales
+            Route::get('/pickup', 'index')->name('pickup.index');
+
+            // Form create pickup
+            Route::get('/pickup/create', 'create')->name('pickup.create');
+
+            // Simpan pickup
+            Route::post('/pickup/store', 'store')->name('pickup.store');
+
+            // Edit pickup
+            Route::get('/pickup/{pickup}/edit', 'edit')->name('pickup.edit');
+
+            // Update pickup
+            Route::put('/pickup/{pickup}', 'update')->name('pickup.update');
+
+            // Hapus pickup
+            Route::delete('/pickup/{pickup}', 'destroy')->name('pickup.destroy');
+
+            // History pickup selesai atau dibatalkan
+            Route::get('/pickup/history', 'history')->name('pickup.history');
+        });
+
+
+        // 🟦 Sales Profile
+        Route::get('/profile', [SalesProfileController::class, 'index'])
+            ->name('profile.index');
+
+        Route::put('/profile/update', [SalesProfileController::class, 'update'])
+            ->name('profile.update');
     });
 
 

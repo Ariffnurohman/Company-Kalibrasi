@@ -39,7 +39,7 @@ public function store(LoginRequest $request): RedirectResponse
     }
 
     if ($user->role === 'sales') {
-        return redirect()->route('sales.scheduling.index');
+        return redirect()->route('sales.dashboard');
     }
 
     // default jika role lain

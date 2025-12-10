@@ -7,122 +7,131 @@
 
     <title>Admin Panel</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    {{-- Vite (Tailwind + DaisyUI otomatis) --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <!-- Global Mate-UI CSS -->
-    <link rel="stylesheet" href="{{ asset('css/mate-admin.css') }}">
+    {{-- Icons --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
 </head>
 
-<body class="bg-light">
+<body class="bg-gray-100 font-sans text-gray-700">
 
-    <div class="d-flex">
+    <div class="flex min-h-screen">
 
-        <!-- SIDEBAR -->
-        <aside class="mate-sidebar shadow-sm">
-            <div class="sidebar-header">
-                <h4 class="fw-bold mb-0">Admin</h4>
-                <span class="text-muted small">Control Panel</span>
+        {{-- SIDEBAR --}}
+        <aside class="w-64 bg-white shadow-lg hidden md:flex flex-col">
+            <div class="p-6 border-b border-gray-200">
+                <h2 class="font-bold text-2xl text-gray-800">Admin</h2>
+                <p class="text-sm text-gray-500 mt-1">Control Panel</p>
             </div>
 
-            <ul class="sidebar-menu">
+            <ul class="menu p-4 flex-1 flex flex-col gap-1 text-gray-600">
+
                 <li>
-                    <a href="{{ route('admin.dashboard') }}" class="menu-item {{ request()->is('admin/dashboard') ? 'active' : '' }}">
-                        <i class="bi bi-speedometer2"></i> Dashboard
+                    <a href="{{ route('admin.dashboard') }}"
+                       class="{{ request()->is('admin/dashboard') ? 'bg-primary text-white rounded-lg' : 'hover:bg-gray-100 rounded-lg' }}">
+                        <i class="bi bi-speedometer2 mr-2"></i> Dashboard
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('admin.orders.index') }}" class="menu-item {{ request()->is('admin/orders*') ? 'active' : '' }}">
-                        <i class="bi bi-receipt-cutoff"></i> Orders
+                    <a href="{{ route('admin.orders.index') }}"
+                       class="{{ request()->is('admin/orders*') ? 'bg-primary text-white rounded-lg' : 'hover:bg-gray-100 rounded-lg' }}">
+                        <i class="bi bi-receipt-cutoff mr-2"></i> Orders
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('admin.pickups.index') }}" class="menu-item {{ request()->is('admin/pickups*') ? 'active' : '' }}">
-                        <i class="bi bi-receipt-cutoff"></i> Pegambilan Alat
+                    <a href="{{ route('admin.pickups.index') }}"
+                       class="{{ request()->is('admin/pickups*') ? 'bg-primary text-white rounded-lg' : 'hover:bg-gray-100 rounded-lg' }}">
+                        <i class="bi bi-box-seam mr-2"></i> Pengambilan Alat
                     </a>
                 </li>
-
 
                 <li>
-                    <a href="#" class="menu-item">
-                        <i class="bi bi-gear"></i> Settings
+                    <a href="#" class="hover:bg-gray-100 rounded-lg">
+                        <i class="bi bi-gear mr-2"></i> Settings
                     </a>
                 </li>
+
             </ul>
+
+            <div class="p-4 border-t border-gray-200">
+                <span class="text-xs text-gray-400">© 2025 Company Name</span>
+            </div>
         </aside>
 
-        <!-- MAIN CONTENT -->
-        <main class="mate-main flex-grow-1">
-            <!-- TOP NAV -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mate-topnav">
-                <div class="container-fluid">
+        {{-- MAIN CONTENT --}}
+        <main class="flex-1 flex flex-col">
 
-                    <span class="fw-semibold fs-5">Admin Panel</span>
+            {{-- TOP NAV --}}
+            <nav class="bg-white shadow-md px-6 py-3 sticky top-0 z-50 flex justify-between items-center">
+                <span class="text-xl font-semibold text-gray-800">Admin Panel</span>
 
-                    <!-- RIGHT SIDE GROUP -->
-                    <div class="d-flex align-items-center ms-auto gap-2">
+                <div class="flex items-center space-x-4">
 
-                        <!-- NOTIFICATION BUTTON -->
-                        <div class="dropdown">
-                            <button class="btn btn-light border position-relative" data-bs-toggle="dropdown">
-                                <i class="bi bi-bell"></i>
+                    {{-- NOTIFICATION --}}
+                    <div class="dropdown dropdown-end">
+                        <label tabindex="0" class="btn btn-ghost btn-circle">
+                            <div class="indicator">
+                                <i class="bi bi-bell text-2xl text-gray-600"></i>
                                 @if($notifications->count() > 0)
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <span class="badge badge-sm indicator-item bg-red-500 text-white">
                                     {{ $notifications->count() }}
                                 </span>
                                 @endif
-                            </button>
+                            </div>
+                        </label>
 
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                @forelse($notifications as $notification)
+                        <ul tabindex="0"
+                            class="dropdown-content menu p-2 shadow-lg bg-white w-80 rounded-lg">
+
+                            @forelse($notifications as $notification)
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('admin.pickups.index') }}">
+                                    <a href="{{ route('admin.pickups.index') }}"
+                                       class="hover:bg-gray-100 rounded-md px-2 py-1">
                                         {{ $notification->data['message'] }}
                                     </a>
                                 </li>
-                                @empty
-                                <li><span class="dropdown-item">Tidak ada notifikasi baru</span></li>
-                                @endforelse
-                            </ul>
-                        </div>
-
-                        <!-- ADMIN DROPDOWN -->
-                        <div class="dropdown">
-                            <button class="btn btn-light border dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="bi bi-person-circle me-1"></i> Admin
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                            @empty
                                 <li>
-                                    <hr class="dropdown-divider">
+                                    <span class="p-2 text-gray-500">Tidak ada notifikasi baru</span>
                                 </li>
-                                <li>
-                                    <form action="#" method="POST">
-                                        <button class="dropdown-item text-danger">Logout</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
+                            @endforelse
 
+                        </ul>
+                    </div>
+
+                    {{-- PROFILE --}}
+                    <div class="dropdown dropdown-end">
+                        <label tabindex="0" class="btn btn-ghost flex items-center space-x-2">
+                            <i class="bi bi-person-circle text-2xl text-gray-600"></i>
+                            <span class="hidden md:inline text-gray-700 font-medium">Admin</span>
+                        </label>
+
+                        <ul tabindex="0"
+                            class="dropdown-content menu p-2 shadow-lg bg-white rounded-lg w-52">
+                            <li><a class="hover:bg-gray-100 rounded-md px-2 py-1">Profile</a></li>
+                            <li><a class="hover:bg-gray-100 rounded-md px-2 py-1">Settings</a></li>
+                            <li>
+                                <form action="#" method="POST">
+                                    <button type="submit" class="text-red-500 w-full text-left px-2 py-1 rounded-md hover:bg-gray-100">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
 
                 </div>
             </nav>
 
-            <!-- PAGE CONTENT -->
-            <div class="p-4">
+            {{-- PAGE CONTENT --}}
+            <div class="p-6 flex-1 overflow-auto">
                 @yield('content')
             </div>
 
         </main>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

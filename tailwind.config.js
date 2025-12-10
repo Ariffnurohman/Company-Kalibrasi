@@ -40,5 +40,6 @@ export default {
         forms,
         typography,
         aspectRatio,
+        require("daisyui"),   // <--- Tambahkan ini
     ],
 };

@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-fluid px-4">
+<div class="container-fluid px-4 ">
 
     <!-- Breadcrumb -->
     <div class="mb-4">
-        <h3 class="fw-bold mb-0">Order Detail</h3>
+        <h3 class="fw-bold text-xl font-bold mb-0">Order Detail</h3>
         <small class="text-muted">Detail informasi Order #{{ $order->order_number }}</small>
     </div>
 
@@ -13,7 +13,7 @@
     <div class="card shadow-sm border-0 mb-4">
         <div class="card-body d-flex justify-content-between align-items-center">
             <div>
-                <h4 class="fw-bold mb-1">{{ $order->customer_name }}</h4>
+                <h4 class="fw-bold font-bold text-xl mb-1">{{ $order->customer_name }}</h4>
                 <span class="text-muted">Instrument: {{ $order->instrument }}</span>
             </div>
 
@@ -38,7 +38,7 @@
 
             <!-- Detail Card -->
             <div class="card shadow-sm border-0 mb-4">
-                <div class="card-header bg-white py-3">
+                <div class="card-header font-bold text-lg py-3">
                     <h5 class="fw-bold mb-0">Order Information</h5>
                 </div>
                 <div class="card-body">
@@ -81,16 +81,16 @@
             </div>
             {{-- WORKFLOW TEKNISI --}}
             <div class="card mt-4 shadow-sm">
-                <div class="card-header bg-info text-white">
-                    <h5 class="mb-0">Workflow Kalibrasi</h5>
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-2 font-semibold text-center text-lg fw-bold">Workflow Kalibrasi</h5>
                 </div>
 
                 <div class="card-body">
                     @if(!$order->workflow_notes && !$order->workflow_file)
-                    <p class="text-muted">Belum ada workflow dari teknisi.</p>
+                    <p class="text-muted bg-light text-center p-3 rounded">Belum ada workflow dari teknisi.</p>
                     @else
                     <p><strong>Catatan Teknisi:</strong></p>
-                    <div class="border p-3 bg-light rounded mb-3">
+                    <div class="border p-3 bg-light text-center rounded mb-3">
                         {!! nl2br(e($order->workflow_notes)) !!}
                     </div>
 
@@ -108,8 +108,8 @@
 
             <!-- Timeline -->
             <div class="card shadow-sm border-0 mb-4">
-                <div class="card-header bg-white py-3">
-                    <h5 class="fw-bold mb-0">Order Timeline</h5>
+                <div class="card-header text-center bg-primary text-white py-3">
+                    <h5 class="fw-bold font-bold text-lg mb-0">Order Timeline</h5>
                 </div>
                 <div class="card-body">
 
@@ -157,8 +157,8 @@
 
             <!-- ACTIONS CARD -->
             <div class="card shadow-sm border-0 mb-4">
-                <div class="card-header bg-white py-3">
-                    <h5 class="fw-bold mb-0">Actions</h5>
+                <div class="card-header py-3">
+                    <h5 class="fw-bold text-lg font-bold text-center mb-0">Actions</h5>
                 </div>
                 <div class="card-body">
 

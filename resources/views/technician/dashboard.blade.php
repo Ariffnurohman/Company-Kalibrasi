@@ -27,7 +27,7 @@
 </div>
 
 <div class="card mt-4 shadow-sm border-0">
-    <div class="card-header bg-white fw-bold">Recent Orders</div>
+    <div class="card-header bg-base-100 rounded-xl shadow p-4">Recent Orders</div>
 
     <div class="table-responsive p-3">
         <table class="table table-bordered">

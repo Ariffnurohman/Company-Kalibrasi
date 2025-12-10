@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\SalesPickup;
+use App\Models\Pickup;
 use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
@@ -15,7 +15,7 @@ class AdminDashboardController extends Controller
         $completedOrders = Order::where('status', 'completed')->count();
         $pendingOrders = Order::where('status', 'pending')->count();
 
-        $pendingPickups = SalesPickup::where('status', 'pending')->get();
+        $pendingPickups = Pickup::where('status', 'pending')->get();
         $notifications = auth()->user()->unreadNotifications;
 
         // Chart data

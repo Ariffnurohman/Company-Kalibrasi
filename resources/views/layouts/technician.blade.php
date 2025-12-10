@@ -1,116 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technician Panel - {{ isset($title) ? $title : 'Dashboard' }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Technician Panel</title>
 
-    <style>
-        body {
-            background-color: #f4f6f9;
-            font-family: 'Inter', sans-serif;
-        }
+    {{-- Vite (Tailwind + DaisyUI otomatis) --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        .sidebar {
-            width: 250px;
-            min-height: 100vh;
-            background-color: white;
-            border-right: 1px solid #ddd;
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding-top: 20px;
-        }
+    {{-- Icons --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-        .sidebar a {
-            color: #333;
-            font-weight: 500;
-            padding: 12px 20px;
-            display: block;
-            text-decoration: none;
-            border-radius: 6px;
-            margin: 4px 0;
-        }
-
-        .sidebar a:hover, .sidebar a.active {
-            background-color: #0d6efd;
-            color: white;
-        }
-
-        .content-area {
-            margin-left: 260px;
-            padding: 25px;
-        }
-
-        .topbar {
-            background: white;
-            border-bottom: 1px solid #ddd;
-            padding: 15px 25px;
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
 
-<body>
+<body class="bg-base-200">
 
-    {{-- SIDEBAR --}}
-    <div class="sidebar shadow-sm">
-        <h5 class="text-center fw-bold mb-4">Technician Panel</h5>
+    <div class="flex min-h-screen">
 
-        <a href="{{ route('technician.dashboard') }}" 
-           class="{{ request()->routeIs('technician.dashboard') ? 'active' : '' }}">
-            📊 Dashboard
-        </a>
-
-        <a href="{{ route('technician.orders.index') }}" 
-           class="{{ request()->routeIs('technician.orders.*') ? 'active' : '' }}">
-            📦 Orders
-        </a>
-
-        <a href="{{ route('logout') }}" 
-           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            🚪 Logout
-        </a>
-
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
-            @csrf
-        </form>
-    </div>
-
-    {{-- CONTENT --}}
-    <div class="content-area">
-
-        {{-- TOP BAR --}}
-        <div class="topbar d-flex justify-content-between align-items-center">
-            <h4 class="fw-bold m-0">{{ $title ?? 'Technician Area' }}</h4>
-            <span class="text-muted">Logged in as: {{ Auth::user()->name }}</span>
-        </div>
-
-        {{-- ALERT GLOBAL --}}
-        @if(session('success'))
-            <div class="alert alert-success shadow-sm">
-                <strong>Success:</strong> {{ session('success') }}
+        {{-- SIDEBAR --}}
+        <aside class="w-64 bg-base-100 shadow-lg hidden md:block">
+            <div class="p-6 border-b">
+                <h2 class="font-bold text-xl">Teknisi</h2>
+                <p class="text-sm text-gray-500">Technician Panel</p>
             </div>
-        @endif
 
-        @if(session('error'))
-            <div class="alert alert-danger shadow-sm">
-                <strong>Error:</strong> {{ session('error') }}
+            <ul class="menu p-4 text-base gap-1">
+
+                <li>
+                    <a href="{{ route('technician.dashboard') }}"
+                       class="{{ request()->is('technician/dashboard') ? 'active bg-primary text-white' : '' }}">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('technician.orders.index') }}"
+                       class="{{ request()->is('technician/orders*') ? 'active bg-primary text-white' : '' }}">
+                        <i class="bi bi-receipt"></i> Orders
+                    </a>
+                </li>
+
+
+            </ul>
+        </aside>
+
+        {{-- MAIN CONTENT --}}
+        <main class="flex-1">
+
+            {{-- TOP NAV --}}
+            <nav class="navbar bg-base-100 shadow-md px-6 sticky top-0 z-50">
+                <div class="flex-1">
+                    <span class="text-lg font-semibold">Technician Panel</span>
+                </div>
+
+                <div class="flex-none gap-3">
+
+                    {{-- PROFILE --}}
+                    <div class="dropdown dropdown-end">
+                        <label tabindex="0" class="btn btn-ghost">
+                            <i class="bi bi-person-circle text-xl"></i>
+                            <span class="ml-2">{{ Auth::user()->name }}</span>
+                        </label>
+
+                        <ul tabindex="0"
+                            class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+
+                            <li><a>Profile</a></li>
+
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="text-red-500">Logout</button>
+                                </form>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+
+            {{-- PAGE CONTENT --}}
+            <div class="p-6">
+                @yield('content')
             </div>
-        @endif
 
-        {{-- PAGE CONTENT --}}
-        <div>
-            @yield('content')
-        </div>
-
+        </main>
     </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

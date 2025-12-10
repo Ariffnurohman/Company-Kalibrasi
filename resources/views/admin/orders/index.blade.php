@@ -65,7 +65,7 @@
                     <td>{{ $order->received_date }}</td>
                     <td>{{ $order->completed_date }}</td>
                     <td class="text-end">
-                        <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-outline-secondary btn-sm">View</a>
+                        <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-outline-secondary bg-white">View</a>
                     </td>
                 </tr>
                 @empty

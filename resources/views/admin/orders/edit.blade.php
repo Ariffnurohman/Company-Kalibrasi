@@ -14,7 +14,7 @@
 
             <!-- Form Card -->
             <div class="card shadow-sm border-0 mb-4">
-                <div class="card-header bg-white py-3">
+                <div class="card-header font-bold py-5">
                     <h5 class="fw-bold mb-0">Order Information</h5>
                 </div>
 
@@ -83,7 +83,7 @@
 
                         <!-- Update Button -->
                         <div class="mt-4">
-                            <button class="btn btn-primary btn-lg w-100">
+                            <button class="bg-primary text-white px-4 py-2 rounded hover:bg-primary-focus w-100">
                                 <i class="bi bi-save me-2"></i> Update Order
                             </button>
                         </div>
@@ -99,19 +99,19 @@
         <div class="col-lg-4">
 
             <div class="card shadow-sm border-0 mb-4">
-                <div class="card-header bg-white py-3">
+                <div class="card-header font-bold  py-3">
                     <h5 class="fw-bold mb-0">Quick Actions</h5>
                 </div>
 
                 <div class="card-body">
 
                     <a href="{{ route('admin.orders.show', $order->id) }}" 
-                       class="btn btn-outline-secondary w-100 mb-2">
+                       class="btn btn-outline-secondary bg-white w-100 mb-2">
                         <i class="bi bi-eye me-2"></i> View Order
                     </a>
 
                     <a href="{{ route('admin.orders.index') }}" 
-                       class="btn btn-outline-dark w-100">
+                       class="btn btn-outline-secondary bg-white w-100">
                         <i class="bi bi-arrow-left me-2"></i> Back to Orders
                     </a>
 
