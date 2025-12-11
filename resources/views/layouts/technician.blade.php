@@ -12,7 +12,7 @@
 
     {{-- Bootstrap Icons --}}
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 
 <body class="bg-gray-100 text-gray-700">
@@ -75,15 +75,17 @@
                         <ul tabindex="0"
                             class="dropdown-content menu p-2 shadow bg-white rounded-lg w-52 border border-gray-200">
 
-                            <li><a class="hover:bg-gray-100 rounded-md">Profile</a></li>
-
                             <li>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button class="text-red-500 hover:bg-gray-100 rounded-md px-2 py-1">
-                                        Logout
-                                    </button>
-                                </form>
+                                <a href="{{ route('technician.profile') }}" class="hover:bg-gray-100 rounded-md">
+                                    Profile
+                                </a>
+                            </li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button class="text-red-500 hover:bg-gray-100 rounded-md px-2 py-1">
+                                    Logout
+                                </button>
+                            </form>
                             </li>
 
                         </ul>

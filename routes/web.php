@@ -73,6 +73,13 @@ Route::middleware(['auth', 'role:admin'])
         // CRUD ORDER
         Route::resource('orders', AdminOrderController::class);
 
+        // Profile Admin
+        Route::get('/profile', [AdminDashboardController::class, 'profile'])
+            ->name('profile');
+
+        Route::put('/profile', [AdminDashboardController::class, 'updateProfile'])
+            ->name('profile.update');
+
         // ============================
         //   PICKUP ALAT (ADMIN)
         // ============================
@@ -84,8 +91,6 @@ Route::middleware(['auth', 'role:admin'])
             // Approve & Reject
             Route::post('/{id}/approve', [AdminPickupController::class, 'approve'])->name('approve');
             Route::post('/{id}/reject', [AdminPickupController::class, 'reject'])->name('reject');
-
-            // Riwayat pickup
         });
     });
 
@@ -133,14 +138,6 @@ Route::middleware(['auth', 'role:sales'])
             // History pickup selesai atau dibatalkan
             Route::get('/pickup/history', 'history')->name('pickup.history');
         });
-
-
-        // 🟦 Sales Profile
-        Route::get('/profile', [SalesProfileController::class, 'index'])
-            ->name('profile.index');
-
-        Route::put('/profile/update', [SalesProfileController::class, 'update'])
-            ->name('profile.update');
     });
 
 
@@ -152,6 +149,13 @@ Route::middleware(['auth', 'role:technician'])
     ->name('technician.')
     ->group(function () {
 
+        // PROFILE TEKNISI
+        Route::get('/profile', [TechnicianDashboardController::class, 'profile'])
+            ->name('profile');
+
+        Route::put('/profile', [TechnicianDashboardController::class, 'updateProfile'])
+            ->name('profile.update');
+
         Route::get('/dashboard', [TechnicianDashboardController::class, 'index'])->name('dashboard');
 
         // List order
@@ -160,7 +164,7 @@ Route::middleware(['auth', 'role:technician'])
         // Detail
         Route::get('/orders/{id}', [TechnicianOrderController::class, 'show'])->name('orders.show');
 
-        // Update status
+        // Update status    
         Route::put('/orders/{id}/update-status', [TechnicianOrderController::class, 'updateStatus'])->name('orders.updateStatus');
 
         // Workflow
