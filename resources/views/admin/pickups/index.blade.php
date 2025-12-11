@@ -88,7 +88,7 @@
 
     <div class="overflow-x-auto bg-white p-4 rounded-xl shadow-md">
 
-        <table class="table w-full">
+        <table class="table w-full ">
             <thead>
                 <tr>
                     <th>No</th>

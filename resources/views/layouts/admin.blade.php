@@ -6,7 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Admin Panel</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/rukun-logo_5.png') }}">
 
+    <style>
+    thead.table-light th {
+        color: #000 !important;
+    }
+
+    /* Atur tampilan tabel di layar HP */
+@media (max-width: 768px) {
+    table.table thead {
+        display: none; /* Sembunyikan header di HP */
+    }
+
+    table.table tbody tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 10px;
+        background: #fff;
+    }
+
+    table.table tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    table.table tbody td div {
+        font-weight: 600;
+        color: #555;
+    }
+}
+
+</style>
     {{-- Tailwind + DaisyUI --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -75,7 +110,7 @@
 
             {{-- Footer --}}
             <div class="p-4 border-t border-gray-200 text-xs text-gray-400">
-                © 2025 Company Name
+                © 2025 PT. Rukun Sejahtera Teknik
             </div>
 
         </aside>
@@ -99,7 +134,9 @@
                     <i class="bi bi-list"></i>
                 </button>
 
-                <span class="text-xl font-semibold">Admin Panel</span>
+                <img src="{{ asset('images/rukun-logo_5.png') }}"
+                    alt="Admin Panel"
+                    class="h-8 inline-block">
 
                 {{-- Right Icons --}}
                 <div class="flex items-center space-x-4">

@@ -8,7 +8,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\AdminPickupController;
-
+use App\Http\Controllers\Admin\OrderExportController;
 // SALES
 use App\Http\Controllers\Sales\SalesDashboardController;
 use App\Http\Controllers\Sales\SalesPickupController;
@@ -63,10 +63,17 @@ Route::post('/cek-alat', [PublicController::class, 'cekAlatProcess'])->name('cek
 // ===========================
 // ADMIN ROUTES
 // ===========================
+
+// EXPORT & IMPORT
+
+Route::get('/admin/orders/export', [OrderExportController::class, 'export'])
+->name('admin.orders.export');
+
 Route::middleware(['auth', 'role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
+
 
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 

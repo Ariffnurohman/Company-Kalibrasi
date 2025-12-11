@@ -61,34 +61,34 @@
                 <tbody class="divide-y">
 
                     @php
-                        $statusColor = [
-                            'pending' => 'bg-yellow-200 text-yellow-800',
-                            'processing' => 'bg-blue-200 text-blue-800',
-                            'completed' => 'bg-green-200 text-green-800',
-                            'calibration' => 'bg-red-200 text-red-800',
-                            'waiting certificate' => 'bg-indigo-200 text-indigo-800',
-                        ];
+                    $statusColor = [
+                    'pending' => 'bg-yellow-200 text-yellow-800',
+                    'processing' => 'bg-blue-200 text-blue-800',
+                    'completed' => 'bg-green-200 text-green-800',
+                    'calibration' => 'bg-red-500 text-white',
+                    'waiting certificate' => 'bg-indigo-200 text-indigo-800',
+                    ];
                     @endphp
 
                     @foreach ($recentOrders as $order)
-                        <tr class="hover:bg-gray-50">
-                            <td class="py-3 px-4">{{ $order->id }}</td>
+                    <tr class="hover:bg-gray-50">
+                        <td class="py-3 px-4">{{ $order->id }}</td>
 
-                            <td class="py-3 px-4">
-                                {{ $order->customer_name }}
-                            </td>
+                        <td class="py-3 px-4">
+                            {{ $order->customer_name }}
+                        </td>
 
-                            <td class="py-3 px-4">
-                                <span class="px-3 py-1 text-xs rounded-full font-semibold 
-                                {{ $statusColor[strtolower($order->status)] ?? 'bg-gray-200 text-gray-800' }}">
-                                    {{ ucfirst($order->status) }}
-                                </span>
-                            </td>
+                        <td class="py-3 px-4">
+                            <span class="px-3 py-1 text-xs rounded-full font-bold 
+                                {{ $statusColor[strtolower($order->status)] ?? 'bg-gray-200 text-white-800' }}">
+                                {{ ucfirst($order->status) }}
+                            </span>
+                        </td>
 
-                            <td class="py-3 px-4">
-                                {{ $order->created_at->format('d M Y') }}
-                            </td>
-                        </tr>
+                        <td class="py-3 px-4">
+                            {{ $order->created_at->format('d M Y') }}
+                        </td>
+                    </tr>
                     @endforeach
 
                 </tbody>
