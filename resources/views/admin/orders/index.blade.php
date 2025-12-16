@@ -61,6 +61,7 @@
                 $statusColor = [
                 'pending' => 'bg-yellow-500 text-white',
                 'processing' => 'bg-blue-500 text-white',
+                'in progress' => 'bg-blue-600 text-white',
                 'completed' => 'bg-green-500 text-white',
                 'calibration' => 'bg-red-500 text-white',
                 'waiting certificate' => 'bg-purple-500 text-white',

@@ -40,12 +40,11 @@ class SalesPickupController extends Controller
 
     public function history()
     {
-        // Ambil hanya pickup milik sales login
         $pickups = Pickup::where('sales_id', auth()->id())
-            ->whereIn('status', ['completed', 'cancelled', 'done']) // sesuaikan statusmu
+            ->whereIn('status', ['pending', 'completed', 'cancelled', 'done'])
             ->latest()
             ->get();
-
+    
         return view('sales.pickup.history', compact('pickups'));
     }
 }

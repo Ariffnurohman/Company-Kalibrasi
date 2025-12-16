@@ -32,8 +32,8 @@
     {{-- TABLE PENDING --}}
     <div class="overflow-x-auto bg-white p-4 rounded-xl shadow-md">
         <table class="table w-full">
-            <thead>
-                <tr>
+            <thead class="table-light">
+                <tr class="text-dark">
                     <th>Order</th>
                     <th>Sales</th>
                     <th>Tanggal Pickup</th>
@@ -89,8 +89,8 @@
     <div class="overflow-x-auto bg-white p-4 rounded-xl shadow-md">
 
         <table class="table w-full ">
-            <thead>
-                <tr>
+            <thead class="table-light">
+                <tr class="text-dark">
                     <th>No</th>
                     <th>Order</th>
                     <th>Sales</th>

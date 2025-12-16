@@ -20,6 +20,12 @@ class Order extends Model
         'qr_code',
     ];
 
+    protected $casts = [
+        'received_date'  => 'date',
+        'completed_date' => 'date',
+        'status'         => 'string',
+    ];
+
     public function technician()
     {
         return $this->belongsTo(User::class, 'technician_id');

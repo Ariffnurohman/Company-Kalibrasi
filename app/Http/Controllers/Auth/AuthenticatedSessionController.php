@@ -57,6 +57,6 @@ public function store(LoginRequest $request): RedirectResponse
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }
