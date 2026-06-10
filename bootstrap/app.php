@@ -10,6 +10,14 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
+    ->withMiddleware(function (Middleware $middleware) {
+        
+        // 🟢 TAMBAHKAN BARIS ALIAS INI
+        $middleware->alias([
+            'technician' => \App\Http\Middleware\EnsureUserIsTechnician::class,
+        ]);
+    })
+    
     ->withMiddleware(function (Middleware $middleware): void {
         // Daftarkan middleware web kamu di sini
         $middleware->web([
@@ -27,3 +35,5 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->create();
+
+    

@@ -148,37 +148,27 @@ Route::middleware(['auth', 'role:sales'])
     });
 
 
-// ===========================
-// TECHNICIAN ROUTES
-// ===========================
-Route::middleware(['auth', 'role:technician'])
-    ->prefix('technician')
-    ->name('technician.')
-    ->group(function () {
+// =====================================================
+// AREA ROUTE TEKNISI (TECHNICIAN)
+// =====================================================
+Route::middleware(['auth', 'technician'])->prefix('technician')->name('technician.')->group(function () {
+    
+    // Dashboard & Profile
+    Route::get('/dashboard', [TechnicianDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [TechnicianDashboardController::class, 'profile'])->name('profile');
+    Route::post('/profile', [TechnicianDashboardController::class, 'updateProfile'])->name('profile.update');
 
-        // PROFILE TEKNISI
-        Route::get('/profile', [TechnicianDashboardController::class, 'profile'])
-            ->name('profile');
+    // Orders Management
+    Route::get('/orders', [TechnicianOrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{id}', [TechnicianOrderController::class, 'show'])->name('orders.show');
+    Route::put('/orders/{id}/update-status', [TechnicianOrderController::class, 'updateStatus'])->name('orders.updateStatus');
 
-        Route::put('/profile', [TechnicianDashboardController::class, 'updateProfile'])
-            ->name('profile.update');
-
-        Route::get('/dashboard', [TechnicianDashboardController::class, 'index'])->name('dashboard');
-
-        // List order
-        Route::get('/orders', [TechnicianOrderController::class, 'index'])->name('orders.index');
-
-        // Detail
-        Route::get('/orders/{id}', [TechnicianOrderController::class, 'show'])->name('orders.show');
-
-        // Update status    
-        Route::put('/orders/{id}/update-status', [TechnicianOrderController::class, 'updateStatus'])->name('orders.updateStatus');
-
-        // Workflow
-        Route::get('/orders/{id}/workflow', [TechnicianOrderController::class, 'workflow'])->name('orders.workflow');
-        Route::post('/orders/{id}/workflow', [TechnicianOrderController::class, 'storeWorkflow'])->name('orders.workflow.store');
-    });
-
+    // Workflow Kalibrasi (Dirapikan & Disinkronkan)
+    Route::get('/orders/{id}/workflow', [TechnicianOrderController::class, 'workflow'])->name('orders.workflow');
+    
+    // 🟢 Cukup gunakan 1 baris ini (Menghubungkan view workflow ke fungsi store milik OrderController)
+    Route::post('/orders/{id}/workflow', [TechnicianOrderController::class, 'storeWorkflow'])->name('orders.saveWorkflow');
+});
 
 // ===========================
 // QR CODE DOWNLOAD
